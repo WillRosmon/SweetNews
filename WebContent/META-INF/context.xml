@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Resource name="jdbc/purchaseDataSource" auth="Container"
+	<Resource name="jdbc/SweetNewsDataSource" auth="Container"
 		driverClassName="com.mysql.jdbc.Driver"
 		url="jdbc:mysql://localhost:3306/SweetNews?autoReconnect=true"
 		username="snadmin" password="snpass" maxActive="100" maxIdle="30"
