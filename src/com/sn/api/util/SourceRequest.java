@@ -7,13 +7,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SourceRequest {
 	
