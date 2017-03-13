@@ -5,8 +5,6 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.sn.database.utilities.ConnectionPool;
-
 public class Source {
 
 	private String id;
