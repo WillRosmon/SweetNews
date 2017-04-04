@@ -1,4 +1,5 @@
 <%@include file="header.jsp" %>
+<%@include file="sidebar.jsp" %>
 
 <p> Hello World! </p>
 
