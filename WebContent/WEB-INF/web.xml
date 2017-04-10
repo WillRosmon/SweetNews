@@ -4,7 +4,7 @@
     <session-timeout>30</session-timeout>
   </session-config>
   <servlet>
-    <servlet-name>MainServ</servlet-name>
+    <servlet-name>MainServlet</servlet-name>
     <servlet-class>serv.MainServ</servlet-class>
   </servlet>
   <servlet-mapping>
