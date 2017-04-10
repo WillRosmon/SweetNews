@@ -50,7 +50,7 @@ public class SourceAccessor {
 			DbUtil.closeResultSet(rs);
 		}
 	}
-	public static Source asSource(ResultSet rs) {
+	private static Source asSource(ResultSet rs) {
 		Source source = new Source();
 		
 		return source;
