@@ -33,12 +33,14 @@ public class SourceAccessor {
 			while(rs.next()) {
 				sources.add(asSource(rs));
 			}
+			return sources;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			cleanup(ps, rs);
 			pool.freeConnection(connection);
 		}
+		return null;
 	}
 	
 	
