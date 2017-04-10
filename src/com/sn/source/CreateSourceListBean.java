@@ -36,8 +36,6 @@ public class CreateSourceListBean {
 				source.setUrl(getProperty(jsonObj, APIConstants.URL));
 				source.setUrlLargeLogo(getProperty(jsonObj, APIConstants.LOGO_URLS));
 				
-				
-				
 				sources.add(source);
 			}
 			
