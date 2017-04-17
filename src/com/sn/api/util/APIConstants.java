@@ -9,6 +9,7 @@ public class APIConstants {
 	public static final String VERSION = "v1";
 	public static final String ARTICLES = "articles";
 	public static final String SOURCES = "sources";
+	public static final String API_KEY_TAG = "apiKey";
 	
 	
 	//Article Parameters
