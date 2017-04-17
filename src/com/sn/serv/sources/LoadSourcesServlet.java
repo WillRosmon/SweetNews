@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sn.api.util.APIConstants;
 import com.sn.database.objects.Source;
+import com.sn.source.CreateSourceListBean;
 
 /**
  * Servlet implementation class LoadSourcesServlet
@@ -33,6 +35,9 @@ public class LoadSourcesServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		List<Source> sourcesList = null;
+		CreateSourceListBean sourceListBean = new CreateSourceListBean();
+		sourcesList = sourceListBean.getSources();
+		request.setAttribute(APIConstants.SOURCES, sourcesList);
 		
 	}
 

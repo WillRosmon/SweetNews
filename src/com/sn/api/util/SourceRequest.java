@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONTokener;
 
 public class SourceRequest {
@@ -47,7 +48,8 @@ public class SourceRequest {
 					sb.append(line);
 				}
 				
-				JSONArray jsonArray = (JSONArray) new JSONTokener(sb.toString()).nextValue();
+				JSONObject jsonObject = new JSONObject(sb.toString());
+				JSONArray jsonArray = jsonObject.getJSONArray(APIConstants.SOURCES);
 				return jsonArray;
 			}
 		} catch (MalformedURLException e) {
