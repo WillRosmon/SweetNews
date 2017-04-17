@@ -38,7 +38,7 @@ public class SourceRequest {
 			connection.setRequestMethod("GET");
 			responseCode = connection.getResponseCode();
 			
-			if(responseCode == HttpURLConnection.HTTP_ACCEPTED) {
+			if(responseCode == HttpURLConnection.HTTP_OK) {
 				bufferedReader = new BufferedReader(
 						new InputStreamReader(connection.getInputStream()));
 				sb = new StringBuilder();
