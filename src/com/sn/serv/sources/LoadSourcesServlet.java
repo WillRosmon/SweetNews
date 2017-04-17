@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sn.api.util.APIConstants;
 import com.sn.database.objects.Source;
-import com.sn.source.CreateSourceListBean;
+import com.sn.list.beans.CreateSourceListBean;
 
 /**
  * Servlet implementation class LoadSourcesServlet

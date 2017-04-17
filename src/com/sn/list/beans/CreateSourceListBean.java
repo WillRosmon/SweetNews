@@ -1,4 +1,4 @@
-package com.sn.source;
+package com.sn.list.beans;
 
 import java.util.ArrayList;
 import java.util.List;
