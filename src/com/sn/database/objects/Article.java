@@ -7,6 +7,7 @@ public class Article {
 	private String url;
 	private String urlToImage;
 	private String publishTime;
+	private String source;
 	
 	public Article() {
 		author = null;
@@ -15,6 +16,7 @@ public class Article {
 		url = null;
 		urlToImage = null;
 		publishTime = null;
+		setSource(null);
 	}
 
 	public String getAuthor() {
@@ -63,6 +65,14 @@ public class Article {
 
 	public void setPublishTime(String publishTime) {
 		this.publishTime = publishTime;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
 	}
 	
 	

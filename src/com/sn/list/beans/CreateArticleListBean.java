@@ -44,7 +44,7 @@ public class CreateArticleListBean {
 				article.setPublishTime(publishTime == null ? "unknown" : publishTime);
 				String imageUrl = jsonObject.getString(APIConstants.IMAGE_URL);
 				article.setUrlToImage(imageUrl == null ? "null" : imageUrl);
-				
+				article.setSource(sourceId);
 				articlesList.add(article);
 			} catch (JSONException e) {
 				Logger.getLogger(SourceRequest.class.getName()).log(Level.SEVERE, null, e);
