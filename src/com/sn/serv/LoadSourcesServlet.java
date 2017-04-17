@@ -1,4 +1,4 @@
-package com.sn.serv.sources;
+package com.sn.serv;
 
 import java.io.IOException;
 import java.util.List;
