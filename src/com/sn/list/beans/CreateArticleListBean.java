@@ -54,4 +54,10 @@ public class CreateArticleListBean {
 		
 		return articlesList;
 	}
+	
+	public List<Article> getArticlesByTopic(String topic) { 
+		CreateSourceListBean sourceListBean = new CreateSourceListBean();
+		
+		return null;
+	}
 }

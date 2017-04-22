@@ -46,6 +46,13 @@ public class CreateSourceListBean {
 		}
 	}
 	
+	public List<Source> getSourcesByTopic(String Topic) {
+		
+		
+		
+		return null;
+	}
+	
 	private String getProperty(JSONObject jsonObj, String prop) throws JSONException {
 		return jsonObj.getString(prop);
 	}
