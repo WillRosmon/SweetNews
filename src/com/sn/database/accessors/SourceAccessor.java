@@ -19,7 +19,6 @@ public class SourceAccessor {
 	private PreparedStatement _selectourceByID;
 	private PreparedStatement _selectSourcesByTopic;
 	private PreparedStatement _selectAllSources;
-	private PreparedStatement _deleteSource;
 	
 	public SourceAccessor(Connection connection) {
 		this.connection = connection;
@@ -33,12 +32,11 @@ public class SourceAccessor {
 		ResultSet rs = null;
 		StringBuilder sb = new StringBuilder();
 		ArrayList<Source> sources = new ArrayList<Source>();
-		sb.append("SELECT * FROM ")
-		.append(DbConstants.SOURCE_TABLE);
+		
 		
 		try {
-			ps = connection.prepareStatement(sb.toString());
-			rs = ps.executeQuery();
+			_selectAllSources = getSelectAllSourcesStatement();
+			rs = _selectAllSources.executeQuery();
 			
 			while(rs.next()) {
 				sources.add(asSource(rs));
@@ -47,10 +45,53 @@ public class SourceAccessor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			cleanup(ps, rs);
+			cleanup(_selectAllSources, rs);
 			pool.freeConnection(connection);
 		}
 		return null;
+	}
+	
+	public Source selectSourceById(String id) {
+		ResultSet rs = null;
+		try {
+			Source source = new Source();
+			_selectourceByID = getSelectSourceByIDStatement();
+			_selectourceByID.setString(0, id);
+			rs = _selectourceByID.executeQuery();
+			while(rs.next()) {
+				source = asSource(rs);
+			}
+			return source;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			cleanup(_selectourceByID, rs);
+		}
+		return null;
+	}
+	
+	public void insertSource(Source source) throws SQLException {
+		try {
+			_insertSource = getInsertStatement();
+			_insertSource.setString(0, source.getName());
+			_insertSource.setString(1, source.getDescription());
+			_insertSource.setString(2, source.getUrl());
+			_insertSource.setString(3, source.getCategory());
+			_insertSource.setString(4, source.getLanguage());
+			_insertSource.setString(5, source.getCountry());
+			_insertSource.setString(6, source.getUrlLogo());
+			_insertSource.setString(7, source.getApprovalStatus());
+			_insertSource.setString(8, source.getUserId());
+			
+			_insertSource.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			_insertSource.close();
+		}
+		
+		
 	}
 	
 	
@@ -62,9 +103,15 @@ public class SourceAccessor {
 			DbUtil.closeResultSet(rs);
 		}
 	}
-	private Source asSource(ResultSet rs) {
+	private Source asSource(ResultSet rs) throws SQLException {
 		Source source = new Source();
-		
+		source.setCategory(rs.getString(DbConstants.SOURCE_COL_CATEGORY));
+		source.setCountry(rs.getString(DbConstants.SOURCE_COL_COUNTRY));
+		source.setDescription(rs.getString(DbConstants.SOURCE_COL_DESCRIPTION));
+		source.setId(rs.getString(DbConstants.SOURCE_COL_SOURCE_ID));
+		source.setLanguage(rs.getString(DbConstants.SOURCE_COL_LANGUAGE));
+		source.setName(rs.getString(DbConstants.SOURCE_COL_NAME));
+		source.setUrl(rs.getString(DbConstants.SOURCE_COL_URL));
 		return source;
 	}
 	
@@ -72,6 +119,26 @@ public class SourceAccessor {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
 		sb.append(DbConstants.SOURCE_TABLE);
+		sb.append(" ( ");
+		sb.append(DbConstants.SOURCE_COL_NAME);
+		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_DESCRIPTION);
+		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_URL);
+		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_CATEGORY);
+		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_LANGUAGE);
+		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_COUNTRY);
+		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_URLLOGO);
+		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_APPROVALSTATUS);
+		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_USERID);
+		sb.append(" ) ");
+		sb.append("VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? ");
 		
 		_insertSource = connection.prepareStatement(sb.toString());
 		return _insertSource;
@@ -90,9 +157,11 @@ public class SourceAccessor {
 		sb.append("SELECT * FROM ");
 		sb.append(DbConstants.SOURCE_TABLE);
 		sb.append(" WHERE ");
+		sb.append(DbConstants.SOURCE_COL_SOURCE_ID);
+		sb.append(" = ?");
 		
-		_selectAllSources = connection.prepareStatement(sb.toString());
-		return _selectAllSources;
+		_selectourceByID = connection.prepareStatement(sb.toString());
+		return _selectourceByID;
 	}
 	
 	private PreparedStatement getSelectSourceByTopicStatement() throws SQLException {
@@ -100,8 +169,11 @@ public class SourceAccessor {
 		sb.append("SELECT * FROM ");
 		sb.append(DbConstants.SOURCE_TABLE);
 		sb.append(" WHERE ");
+		sb.append(DbConstants.SOURCE_COL_CATEGORY);
+		sb.append(" = ?");
 		
 		_selectSourcesByTopic = connection.prepareStatement(sb.toString());
 		return _selectSourcesByTopic;
 	}
+
 }
