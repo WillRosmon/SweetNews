@@ -3,18 +3,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<title>SweetNews</title>
-	
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Material Portfolio Template Demo</title>
+		<meta name="description" content="Demo of Material design portfolio template by TemplateFlip.com."/>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;amp;lang=en" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
 	</head>
 	
-	<body>
+	<body id="top">
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+	      <header class="mdl-layout__header mdl-layout__header--waterfall site-header">
+	        <div class="mdl-layout__header-row site-logo-row">
+	        	<span class="mdl-layout__title">
+	            	<span class="site-description" style="margin-left: 20px;">Sweet News</span>
+            	</span>
+            </div>
+	        <div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
+	          <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+	          	<a class="mdl-navigation__link" href="index.html">Home</a>
+	          	<a class="mdl-navigation__link" href="portfolio.html">About</a>
+	          	<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
+	          	<a class="mdl-navigation__link" href="#login">Login</a>
+	          </nav>
+	        </div>
+	      </header>
