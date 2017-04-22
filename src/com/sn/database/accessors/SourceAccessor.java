@@ -90,10 +90,27 @@ public class SourceAccessor {
 		} finally {
 			_insertSource.close();
 		}
-		
-		
 	}
 	
+	public List<Source> selectSourcesByTopic(String topic) {
+		ResultSet rs = null;
+		try {
+			_selectSourcesByTopic = getSelectSourceByTopicStatement();
+			ArrayList<Source> sourceList = new ArrayList<Source>();
+			rs = _selectSourcesByTopic.executeQuery();
+			while(rs.next()) {
+				sourceList.add(asSource(rs));
+			}
+			return sourceList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			cleanup(_selectSourcesByTopic, rs);
+		}
+		return null;
+	}
+
 	
 	private void cleanup(PreparedStatement ps, ResultSet rs) {
 		if(ps != null) {
