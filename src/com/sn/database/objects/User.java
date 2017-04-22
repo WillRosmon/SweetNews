@@ -7,6 +7,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private List<String> interests;
+	
 	public String getEmail() {
 		return email;
 	}
