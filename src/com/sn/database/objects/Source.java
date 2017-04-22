@@ -14,10 +14,9 @@ public class Source {
 	private String category;
 	private String language;
 	private String country;
-	private String urlSmallLogo;
-	private String urlMedLogo;
-	private String urlLargeLogo;
-	private String[] sortByAvailable;
+	private String urlLogo;
+	private String userId;
+	private String approvalStatus;
 	
 	public Source() {
 		this.id = null;
@@ -27,10 +26,8 @@ public class Source {
 		this.category = null;
 		this.language = null;
 		this.country = null;
-		this.urlSmallLogo = null;
-		this.urlMedLogo = null;
-		this.urlLargeLogo = null;
-		sortByAvailable = new String[3];
+		this.urlLogo = null;
+		this.approvalStatus = null;
 	}
 
 	public String getId() {
@@ -88,39 +85,31 @@ public class Source {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
-	public String getUrlSmallLogo() {
-		return urlSmallLogo;
-	}
-
-	public void setUrlSmallLogo(String urlSmallLogo) {
-		this.urlSmallLogo = urlSmallLogo;
-	}
-
-	public String getUrlMedLogo() {
-		return urlMedLogo;
-	}
-
-	public void setUrlMedLogo(String urlMedLogo) {
-		this.urlMedLogo = urlMedLogo;
-	}
-
-	public String getUrlLargeLogo() {
-		return urlLargeLogo;
-	}
-
-	public void setUrlLargeLogo(String urlLargeLogo) {
-		this.urlLargeLogo = urlLargeLogo;
-	}
-
-	public String[] getSortByAvailable() {
-		return sortByAvailable;
-	}
-
-	public void setSortByAvailable(String[] sortByAvailable) {
-		this.sortByAvailable = sortByAvailable;
-	}
 	
+	public String getUrlLogo() {
+		return urlLogo;
+	}
+
+	public void setUrlLogo(String urlLogo) {
+		this.urlLogo = urlLogo;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
 	public URL getUrlAsUrl() {
 		try {
 			return new URL(url);
