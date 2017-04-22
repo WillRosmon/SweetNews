@@ -46,6 +46,7 @@ public class DbConstants {
 	public static final String SOURCE_COL_COUNTRY= "Country";
 	public static final String SOURCE_COL_URLLOGO= "UrlLogo";
 	public static final String SOURCE_COL_APPROVALSTATUS= "ApprovalStatus";
+	public static final String SOURCE_COL_SOURCE_ID = "SourceId";
 
 	/*Article Table*/
 	public static final String ARTICLE_COL_AUTHOR= "Author";

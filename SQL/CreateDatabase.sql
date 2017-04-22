@@ -36,7 +36,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `sweetnews`.`source`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sweetnews`.`source` (
-  `SourceId` INT(11) NOT NULL AUTO_INCREMENT,
+  `SourceId` VARCHAR(30) NOT NULL,
   `Name` VARCHAR(60) NULL DEFAULT NULL,
   `Description` VARCHAR(256) NULL DEFAULT NULL,
   `Url` VARCHAR(2000) NULL DEFAULT NULL,
