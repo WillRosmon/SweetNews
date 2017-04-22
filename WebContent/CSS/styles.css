@@ -1,3 +1,7 @@
+body{
+	background-image: url("../Images/img_6264.jpg");
+}
+
 img {
   max-width: 100%;
 }
@@ -14,14 +18,14 @@ img {
 
 .site-description {
   display: block;
-  font-size: 14px;
+  font-size: 18px;
   text-align: center;
   font-weight: 400;
   margin-bottom: 10px;
 }
 
 .is-compact .mdl-layout__title span {
-  display: none;
+/*   display: none; */
 }
 
 .site-logo-row {

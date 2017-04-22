@@ -6,21 +6,23 @@
       </div>
       <main class="mdl-layout__content">
         <div class="site-content">
-          <div class="container"><div class="mdl-grid site-max-width">
-    <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp welcome-card portfolio-card">
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Welcome</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          SweetNews was founded on the premise that there are too many new sources out there that provide what is being called "fake news".
-          <br/>
-          To eliminate this, we provide curated news based upon your own interests from <strong>only</strong> verified resources!
-          <br/>
-          Feel free to look around and thanks for stopping by!
-        </div>
-    </div>
-</div>
-<section class="section--center mdl-grid site-max-width">
+          <div class="container">
+          	<div class="mdl-grid site-max-width">
+    			<div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp welcome-card portfolio-card">
+			        <div class="mdl-card__title">
+			        	<img src="Images/img_6264.jpg" />
+			          <h2 class="mdl-card__title-text">Welcome</h2>
+			        </div>
+			        <div class="mdl-card__supporting-text">
+<!-- 			          SweetNews was founded on the premise that there are too many new sources out there that provide what is being called "fake news". -->
+<!-- 			          <br/> -->
+<!-- 			          To eliminate this, we provide curated news based upon your own interests from <strong>only</strong> verified resources! -->
+<!-- 			          <br/> -->
+<!-- 			          Feel free to look around and thanks for stopping by! -->
+			        </div>
+			    </div>
+			</div>
+			<section class="section--center mdl-grid site-max-width">
 	
     <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
         <div class="mdl-card__media">
@@ -86,10 +88,10 @@
       </div>
       <div class="demo-card-event mdl-cell mdl-card mdl-shadow--4dp event-card portfolio-card">
         <div class="mdl-card__title mdl-card--expand">
-        	<h2 class="mdl-card__title-text" style="margin-left: 40% !important"> Login </h2>
+        	<h2 class="mdl-card__title-text" style="margin-left: 40% !important; margin-bottom: 44px"> Login </h2>
        	</div>
        	<div>
-          	<div id="login" class="loginContainer" style="float:right;margin-left:25%;margin-bottom:25%">
+          	<div id="login" class="loginContainer" style="margin-left:25%;margin-bottom:25%">
 				<form action="" method="post">
 					<input type="hidden" name="action" value="login" />
 <!-- 					<label>Email</label> -->
