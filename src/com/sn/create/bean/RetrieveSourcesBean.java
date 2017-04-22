@@ -35,8 +35,12 @@ public class RetrieveSourcesBean {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		connection = pool.getConnection();
 		List<Source> sourceList = null;
+		try {
 		SourceAccessor sourceAccessor = new SourceAccessor(connection);
 		sourceList = sourceAccessor.selectSourcesByTopic(category);
 		return sourceList;
+		} finally {
+			pool.freeConnection(connection);
+		}
 	}
 }
