@@ -12,16 +12,16 @@
           <h2 class="mdl-card__title-text">Welcome</h2>
         </div>
         <div class="mdl-card__supporting-text">
-          Demo of Material Design Portfolio Template by TemplateFlip. Click on &quot;Download&quot; button below to download the template.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href=" https://templateflip.com/templates/material-portfolio/" target="_blank">
-            Download
-          </a>
+          SweetNews was founded on the premise that there are too many new sources out there that provide what is being called "fake news".
+          <br/>
+          To eliminate this, we provide curated news based upon your own interests from <strong>only</strong> verified resources!
+          <br/>
+          Feel free to look around and thanks for stopping by!
         </div>
     </div>
 </div>
 <section class="section--center mdl-grid site-max-width">
+	
     <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
         <div class="mdl-card__media">
             <img class="article-image" src="img/portfolio1.jpg" border="0" alt="">
@@ -57,10 +57,6 @@
     </div>
 </section>
 
-<section class="section--center mdl-grid site-max-width homepage-portfolio">
-    <a class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="portfolio.html">View Portfolio</a>
-</section>
-
 <div class="homepage-footer">
   <section class="mdl-grid site-max-width">
       <div class="mdl-cell mdl-card mdl-cell--8-col mdl-cell--4-col-tablet  mdl-shadow--4dp portfolio-card">
@@ -93,7 +89,7 @@
         	<h2 class="mdl-card__title-text" style="margin-left: 40% !important"> Login </h2>
        	</div>
        	<div>
-          	<div class="loginContainer" style="float:right;margin-left:25%;margin-bottom:25%">
+          	<div id="login" class="loginContainer" style="float:right;margin-left:25%;margin-bottom:25%">
 				<form action="" method="post">
 					<input type="hidden" name="action" value="login" />
 <!-- 					<label>Email</label> -->
@@ -106,13 +102,6 @@
 					<input type="submit" value="Log in" id="loginButton" />
 				</form>
 			</div>
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent">
-            Add to Calendar
-          </a>
-          <div class="mdl-layout-spacer"></div>
-          <i class="material-icons">event</i>
         </div>
       </div>
   </section>

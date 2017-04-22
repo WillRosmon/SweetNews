@@ -17,10 +17,17 @@
 	<body id="top">
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 	      <header class="mdl-layout__header mdl-layout__header--waterfall site-header">
-	        <div class="mdl-layout__header-row site-logo-row"><span class="mdl-layout__title">
-	            <div class="site-logo"></div><span class="site-description">Sweet News</span></span></div>
+	        <div class="mdl-layout__header-row site-logo-row">
+	        	<span class="mdl-layout__title">
+	            	<span class="site-description" style="margin-left: 20px;">Sweet News</span>
+            	</span>
+            </div>
 	        <div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
-	          <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font"><a class="mdl-navigation__link" href="index.html">Home</a><a class="mdl-navigation__link" href="portfolio.html">Portfolio</a><a class="mdl-navigation__link" href="about.html">About</a><a class="mdl-navigation__link" href="contact.html">Contact</a>
+	          <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+	          	<a class="mdl-navigation__link" href="index.html">Home</a>
+	          	<a class="mdl-navigation__link" href="portfolio.html">About</a>
+	          	<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
+	          	<a class="mdl-navigation__link" href="#login">Login</a>
 	          </nav>
 	        </div>
 	      </header>
