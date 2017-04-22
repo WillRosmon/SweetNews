@@ -36,4 +36,12 @@ public class UserBean {
 		userAccessor.addUser(user);
 		pool.freeConnection(connection);
 	}
+	
+	public boolean login (User user) {
+		boolean success = false;
+		
+		
+		return success;
+		
+	}
 }
