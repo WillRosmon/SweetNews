@@ -28,7 +28,7 @@
 						<a class="mdl-navigation__link" href="index.jsp">Home</a>
 						<a class="mdl-navigation__link" href="about.jsp">About</a>
 						<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
-						<a class="mdl-navigation__link" href="#login">Login</a>
+						<a class="mdl-navigation__link" href="index.jsp#login">Login</a>
 						<!-- 		        <a class="mdl-navigation_link" href="">Log Out</a> -->
 					</nav>
 				</div>
