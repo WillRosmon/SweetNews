@@ -17,25 +17,27 @@
 	
 	<body id="top">
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-	      <header class="mdl-layout__header mdl-layout__header--waterfall site-header">
-	        <div class="mdl-layout__header-row site-logo-row">
-	        	<span class="mdl-layout__title">
-	            	<span class="site-description" style="margin-left: 20px;">Sweet News</span>
-            	</span>
-            </div>
-	        <div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
-	          <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-	          	<a class="mdl-navigation__link" href="index.jsp">Home</a>
-	          	<a class="mdl-navigation__link" href="about.jsp">About</a>
-	          	<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
-	          	<c:choose>
-		          	<c:when test="${user} == null">
-		          		<a class="mdl-navigation__link" href="#login">Login</a>
-		          	</c:when>
-		          	<c:otherwise>
-		          		<a class="mdl-navigation_link" href="">Log Out</a>
-		          	</c:otherwise>
-	          	</c:choose>
-	          </nav>
-	        </div>
-	      </header>
+			<header class="mdl-layout__header mdl-layout__header--waterfall site-header">
+				<div class="mdl-layout__header-row site-logo-row">
+					<span class="mdl-layout__title">
+						<span class="site-description" style="margin-left: 20px;">Sweet News</span>
+					</span>
+				</div>
+				<div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
+					<nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+						<a class="mdl-navigation__link" href="index.jsp">Home</a>
+						<a class="mdl-navigation__link" href="about.jsp">About</a>
+						<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
+						<a class="mdl-navigation__link" href="#login">Login</a>
+						<!-- 		        <a class="mdl-navigation_link" href="">Log Out</a> -->
+					</nav>
+				</div>
+			</header>
+		    <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+		      <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+		      	<a class="mdl-navigation__link" href="index.jsp">Home</a>
+		     		<a class="mdl-navigation__link" href="about.jsp">About</a>
+		     		<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
+		     		<a class="mdl-navigation__link" href="index.jsp#login">Login</a>
+		      </nav>
+		    </div>

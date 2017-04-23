@@ -1,5 +1,5 @@
 body{
-	background-image: url("../Images/img_6264.jpg");
+/* 	background-image: url("../Images/img_6264.jpg"); */
 }
 
 img {
@@ -231,3 +231,7 @@ footer .mdl-logo a {
 .footer-container {
   margin: 0 auto;
 } 
+
+.authorDate{
+	margin-top: 25px;
+}
