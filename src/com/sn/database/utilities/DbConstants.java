@@ -55,6 +55,6 @@ public class DbConstants {
 	public static final String ARTICLE_COL_URL= "Url";
 	public static final String ARTICLE_COL_URLTOIMAGE= "UrlToImage";
 	public static final String ARTICLE_COL_PUBLISHTIME= "publishTime";
-
+    public static final String ARTICLE_COL_SOURCEID="SourceId";
 
 }
