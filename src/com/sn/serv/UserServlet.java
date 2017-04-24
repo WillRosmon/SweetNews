@@ -75,7 +75,11 @@ public class UserServlet extends HttpServlet {
 		
 		//Handle admin approval
 		if(action.equals("approve")){
-			//TODO: Set the submitted source to approved or denied in DB
+			//TODO: Set the submitted source to approved in DB
+			//The source that is added does not need to be shown on the site anywhere
+		}
+		if(action.equals("disapprove")){
+			//TODO: Set the submitted source to disapproved in DB
 			//The source that is added does not need to be shown on the site anywhere
 		}
 		

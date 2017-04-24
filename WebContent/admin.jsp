@@ -171,9 +171,9 @@
 							        		<a style="color:white;" href="http://www.cnbc.com/2017/04/21/retailer-bebe-to-close-all-175-of-its-stores.html">Retailer Bebe to close all 175 of its stores</a>
 							        	</td>
 							        	<td>
-							        	<form action="" method="post">
-			                            <button type="submit" name="approve">Approve</button>
-			                            <button type="submit" name="disapprove">Disapprove</button>
+							        	<form action="user" method="post">
+			                            <button type="submit" name="action" value="approve">Approve</button>
+			                            <button type="submit" name="action" value="disapprove">Disapprove</button>
 			                        	</form>
 							        	</td>
 							        	
