@@ -78,7 +78,7 @@
 			   		</div>
 					<div>
 			      		<div id="login" class="loginContainer" style="margin-left:25%;margin-bottom:25%">
-							<form action="" method="post">
+							<form action="user" method="post">
 								<input type="hidden" name="action" value="login" />
 								<input type="email" name="email" placeholder="Email" required />	
 								<br/><br/>

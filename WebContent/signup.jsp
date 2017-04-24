@@ -8,7 +8,8 @@
 						<h2 class="mdl-card__title-text" style="margin-right: 32%">Sign Up to Create a New User</h2>
 <!-- 					</div> -->
 					<div class="mdl-card__supporting-text" style="margin-left:38%">
-						<form action="" method="post">
+						<form action="user" method="post">
+							<input type="hidden" name="action" value="create" />
 							<input type="text" name="name" placeholder="Name" required /><br><br>
 							<input type="email" name="email" placeholder="Email" required /><br><br>
 							<input type="password" name="password" placeholder="Password" required/><br><br>

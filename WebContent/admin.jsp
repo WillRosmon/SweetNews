@@ -133,12 +133,10 @@
 			       	</div>
 			       	<div style="margin-left: 25%">
 			          	<div id="submitSourceForm" class="submitSourceContainer" style="margin-left:25%;margin-bottom:25%;margin-top:2%;">
-							<form action="" method="post">
-								<input type="hidden" name="action" value="login" />
-			<!-- 					<label>Email</label> -->
+							<form action="user" method="post">
+								<input type="hidden" name="action" value="add" />
 								<input type="text" name="source" placeholder="Source: AP/USA Today/etc" required />	
 								<br/><br/>
-			<!-- 					<label>Password</label> -->
 								<input type="text" name="category" placeholder="Category" required/>
 								<br/>
 								<br/>

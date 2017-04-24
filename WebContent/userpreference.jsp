@@ -8,7 +8,8 @@
 						<h2 class="mdl-card__title-text" style="margin-right:35%">What's Your Passion?</h2>
 <!-- 					</div> -->
 					<div class="mdl-card__supporting-text" style="margin-left: 45%;color: white;">
-						<form action="" method="post">
+						<form action="user" method="post">
+							<input type="hidden" name="action" value="preference" />
 							<input type="checkbox" name="preference" name="business">Business<br><br>
 							<input type="checkbox" name="preference" name="technology">Technology<br><br>
 							<input type="checkbox" name="preference" name="sports">Sports<br><br>
