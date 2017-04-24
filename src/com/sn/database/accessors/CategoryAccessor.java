@@ -169,7 +169,9 @@ public class CategoryAccessor {
 	
 	private PreparedStatement getUserCategoryStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM ");
+		sb.append("SELECT "+DbConstants.CATEGORY_TABLE+"."+DbConstants.CATEGORY_COL_CATEGORYID+" , ");
+		sb.append(DbConstants.CATEGORY_TABLE+"."+DbConstants.CATEGORY_COL_CATEGORYDESCRIPTION);
+		sb.append(" FROM ");
 		sb.append(DbConstants.CATEGORY_TABLE);
 		sb.append(" , ");
 		sb.append(DbConstants.USER_PREFERENCE_TABLE);

@@ -118,7 +118,14 @@ public class ArticleAccessor {
 	
 	private PreparedStatement getArticlesByTopicStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM ");
+		sb.append("SELECT "+DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_AUTHOR+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_DESCRIPTION+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_PUBLISHTIME+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_SOURCEID+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_TITLE+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_URL+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_URLTOIMAGE);
+		sb.append(" FROM ");
 		sb.append(DbConstants.CATEGORY_TABLE);
 		sb.append(" , ");
 		sb.append(DbConstants.SOURCE_TABLE);
@@ -168,7 +175,13 @@ public class ArticleAccessor {
 	
 	private PreparedStatement getArticlesBySourceStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM ");
+		sb.append("SELECT "+DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_AUTHOR+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_DESCRIPTION+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_PUBLISHTIME+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_SOURCEID+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_TITLE+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_URL+" , ");
+		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_URLTOIMAGE);
 		sb.append(DbConstants.SOURCE_TABLE);
 		sb.append(" , ");
 		sb.append(DbConstants.ARTICLE_TABLE);
