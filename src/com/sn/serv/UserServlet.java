@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,6 +55,8 @@ public class UserServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			user = userAccessor.getUser(email);
+			UserBean userbean = new UserBean();
+			
 			if (user == null) {
 			//TODO: If it does not, display this message.
 			msg = "Sorry but this user does not exist. <br/>" + 
@@ -71,7 +72,22 @@ public class UserServlet extends HttpServlet {
 			//TODO: If it does exist, set the role of the user and use the session attributes below
 			//session.setAttribute("theUser",user);
 			//session.setAttribute("theAdmin",admin);
-			
+			else if (userbean.checkUserType(user).equals("Participant")){
+                
+                //set as session attribute
+                session.setAttribute("theUser", user);
+                //forward to main.jsp
+                url="/main.jsp";
+            }
+            
+            //Code to check if User Type is Admin
+            else if (userbean.checkUserType(user).equals("Admin")){
+                
+                //set as session attribute
+                session.setAttribute("theAdmin", user);
+                //forward to admin.jsp
+                url="/admin.jsp";
+            }
 					
 			//request.setAttribute("msg", msg);
 		}
@@ -120,7 +136,9 @@ public class UserServlet extends HttpServlet {
 		
 		if(action.equals("preference")){
 			//TODO: Get selected preferences from the radio buttons and store them to the user object
+		String[] preference = request.getParameterValues("preference");
 		
+			
 		}
 		
 		
