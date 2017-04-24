@@ -6,6 +6,7 @@ public class User {
 	private String email;
 	private String firstName;
 	private String lastName;
+	private String password;
 	private List<String> interests;
 	
 	public String getEmail() {
@@ -13,6 +14,12 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getFirstName() {
 		return firstName;

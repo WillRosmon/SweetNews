@@ -6,65 +6,128 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.sn.database.objects.User;
+import com.sn.database.utilities.ConnectionPool;
+import com.sn.database.utilities.DbConstants;
 import com.sn.database.utilities.DbUtil;
 
 public class UserAccessor {
 	private Connection connection;
 	
-	private PreparedStatement _insertUserStatement = null;
-	private PreparedStatement _selectUserStatement = null;
+	private PreparedStatement _insertUserStatement ;
+	private PreparedStatement _insertLoginUserStatement ;
+	private PreparedStatement _selectUserStatement ;
 	
 	public UserAccessor(Connection connection) {
 		this.connection = connection;
 	}
+
 	
-	public void addUser(User user) {
+	public void addUser(User user) throws SQLException {
 		try {
-			getInsertUserStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		DbUtil.closePreparedStatement(_insertUserStatement);
-	}
-	
-	public User getUser(String id) {
-		ResultSet rs = null;
-		try {
-			getSelectUserStatement();
+			_insertUserStatement = getInsertStatement();
+			_insertUserStatement.setString(1, user.getFirstName());
+			_insertUserStatement.setString(2, user.getLastName());
+			_insertUserStatement.setString(2, user.getEmail());
 			
-			rs = _selectUserStatement.executeQuery();
+			_insertUserStatement.executeQuery();
+			
+			_insertLoginUserStatement=getLoginUserInsertStatement();
+			_insertLoginUserStatement.setString(1, user.getEmail());
+			_insertLoginUserStatement.setString(1, user.getPassword());
+			
+			_insertLoginUserStatement.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			_insertUserStatement.close();
+			_insertLoginUserStatement.close();
 		}
-		
-		
-		
-		DbUtil.closePreparedStatement(_selectUserStatement);
-		DbUtil.closeResultSet(rs);
-		return asUser(rs);
 	}
 	
-	private PreparedStatement getInsertUserStatement() throws SQLException{
+	private PreparedStatement getInsertStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
+		sb.append(DbConstants.USER_TABLE);
+		sb.append(" ( ");
+		sb.append(DbConstants.USER_COL_FIRSTNAME);
+		sb.append(", ");
+		sb.append(DbConstants.USER_COL_LASTNAME);
+		sb.append(" ) ");
+		sb.append(DbConstants.USER_COL_EMAIL);
+		sb.append("VALUES ( ?, ? ,?); ");
 		
 		_insertUserStatement = connection.prepareStatement(sb.toString());
 		return _insertUserStatement;
 	}
 	
+	private PreparedStatement getLoginUserInsertStatement() throws SQLException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT INTO ");
+		sb.append(DbConstants.USERLOGIN_TABLE);
+		sb.append(" ( ");
+		sb.append(DbConstants.USERLOGIN_COL_USERNAME);
+		sb.append(", ");
+		sb.append(DbConstants.USERLOGIN_COL_PASSWORD);
+		sb.append(" ) ");
+		sb.append("VALUES ( ?, ? ); ");
+		
+		_insertLoginUserStatement = connection.prepareStatement(sb.toString());
+		return _insertLoginUserStatement;
+	}
+	
+	
+	public User getUser(String email) {
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection connection = pool.getConnection();
+		
+		ResultSet rs = null;
+		
+		try {
+			_selectUserStatement = getSelectUserStatement();
+			rs = _selectUserStatement.executeQuery();
+
+			return asUser(rs);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			cleanup(_selectUserStatement, rs);
+			pool.freeConnection(connection);
+		}
+		return null;
+	}
+		
 	private PreparedStatement getSelectUserStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM ");
-		
+		sb.append("SELECT "+DbConstants.USER_TABLE+"."+DbConstants.USER_COL_FIRSTNAME+" , ");
+		sb.append(DbConstants.USER_TABLE+"."+DbConstants.USER_COL_LASTNAME+" , ");
+		sb.append(DbConstants.USER_TABLE+"."+DbConstants.USER_COL_EMAIL+" , ");
+		sb.append(DbConstants.USERLOGIN_TABLE+"."+DbConstants.USERLOGIN_COL_PASSWORD);
+		sb.append(" FROM ");
+		sb.append(DbConstants.USER_TABLE);
+		sb.append(" , "+DbConstants.USERLOGIN_TABLE + " where ");
+		sb.append(DbConstants.USER_TABLE+"."+DbConstants.USER_COL_EMAIL+" = ");
+		sb.append(DbConstants.USERLOGIN_TABLE+"."+DbConstants.USERLOGIN_COL_USERNAME);
 		_selectUserStatement = connection.prepareStatement(sb.toString());
 		return _selectUserStatement;
 	}
-
-	private User asUser(ResultSet resultSet) {
+	
+	private User asUser(ResultSet rs) throws SQLException{
 		User user = new User();
-		
+		user.setFirstName(rs.getString(DbConstants.USER_COL_FIRSTNAME));
+		user.setFirstName(rs.getString(DbConstants.USER_COL_LASTNAME));
+		user.setFirstName(rs.getString(DbConstants.USER_COL_EMAIL));
+		user.setPassword(rs.getString(DbConstants.USERLOGIN_COL_PASSWORD));
 		return user;
+	}
+	
+	private void cleanup(PreparedStatement ps, ResultSet rs) {
+		if(ps != null) {
+			DbUtil.closePreparedStatement(ps);
+		}
+		if(rs != null) {
+			DbUtil.closeResultSet(rs);
+		}
 	}
 }

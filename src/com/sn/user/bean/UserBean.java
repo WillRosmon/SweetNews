@@ -1,6 +1,7 @@
 package com.sn.user.bean;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import com.sn.database.accessors.UserAccessor;
 import com.sn.database.objects.User;
@@ -33,7 +34,13 @@ public class UserBean {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		connection = pool.getConnection();
 		UserAccessor userAccessor = new UserAccessor(connection);
+		try{			
 		userAccessor.addUser(user);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
 		pool.freeConnection(connection);
 	}
 	
