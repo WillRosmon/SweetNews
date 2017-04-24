@@ -45,10 +45,21 @@ public class UserBean {
 	}
 	
 	public boolean login (User user) {
-		boolean success = false;
-		
-		
-		return success;
-		
+		boolean success = Boolean.TRUE;
+		User loginuser=new User();
+		loginuser=readUserById(user.getEmail());
+		if(loginuser == null)
+		   return Boolean.FALSE;
+		else
+		   return success;
+	}
+	
+	public String checkUserType(User user)
+	{
+		String type="admin";
+		if(readUserById(user.getEmail()).getEmail().contentEquals("admin"))
+		    return type;
+		else
+			return "user";
 	}
 }
