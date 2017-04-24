@@ -32,8 +32,8 @@ public class CategoryAccessor {
 	public void insertCategory(Category category) throws SQLException {
 		try {
 			_insertCategory = getInsertStatement();
-			_insertCategory.setInt(0, category.getCategoryId());
-			_insertCategory.setString(1, category.getCategory());
+			_insertCategory.setInt(1, category.getCategoryId());
+			_insertCategory.setString(2, category.getCategory());
 
 			
 			_insertCategory.executeQuery();
@@ -110,8 +110,8 @@ public class CategoryAccessor {
 			
 			
 			_insertCategoryForUser = getInsertUserCategoryStatement();
-			_insertCategoryForUser.setString(0, user.getEmail());
-			_insertCategoryForUser.setInt(1, category.getCategoryId());
+			_insertCategoryForUser.setString(1, user.getEmail());
+			_insertCategoryForUser.setInt(2, category.getCategoryId());
 
 			
 			_insertCategoryForUser.executeQuery();
@@ -151,7 +151,7 @@ public class CategoryAccessor {
 		
 		try {
 			_selectCategoryForUser = getUserCategoryStatement();
-			_selectCategoryForUser.setString(0, user.getEmail());
+			_selectCategoryForUser.setString(1, user.getEmail());
 			rs = _selectCategoryForUser.executeQuery();
 			
 			while(rs.next()) {

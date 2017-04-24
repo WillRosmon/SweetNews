@@ -28,9 +28,7 @@ public class SourceAccessor {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection connection = pool.getConnection();
 		
-		PreparedStatement ps = null;
 		ResultSet rs = null;
-		StringBuilder sb = new StringBuilder();
 		ArrayList<Source> sources = new ArrayList<Source>();
 		
 		
@@ -56,7 +54,7 @@ public class SourceAccessor {
 		try {
 			Source source = new Source();
 			_selectourceByID = getSelectSourceByIDStatement();
-			_selectourceByID.setString(0, id);
+			_selectourceByID.setString(1, id);
 			rs = _selectourceByID.executeQuery();
 			while(rs.next()) {
 				source = asSource(rs);
@@ -73,15 +71,15 @@ public class SourceAccessor {
 	public void insertSource(Source source) throws SQLException {
 		try {
 			_insertSource = getInsertStatement();
-			_insertSource.setString(0, source.getName());
-			_insertSource.setString(1, source.getDescription());
-			_insertSource.setString(2, source.getUrl());
-			_insertSource.setString(3, source.getCategory());
-			_insertSource.setString(4, source.getLanguage());
-			_insertSource.setString(5, source.getCountry());
-			_insertSource.setString(6, source.getUrlLogo());
-			_insertSource.setString(7, source.getApprovalStatus());
-			_insertSource.setString(8, source.getUserId());
+			_insertSource.setString(1, source.getName());
+			_insertSource.setString(2, source.getDescription());
+			_insertSource.setString(3, source.getUrl());
+			_insertSource.setString(4, source.getCategory());
+			_insertSource.setString(5, source.getLanguage());
+			_insertSource.setString(6, source.getCountry());
+			_insertSource.setString(7, source.getUrlLogo());
+			_insertSource.setString(8, source.getApprovalStatus());
+			_insertSource.setString(9, source.getUserId());
 			
 			_insertSource.executeQuery();
 		} catch (SQLException e) {
@@ -96,6 +94,7 @@ public class SourceAccessor {
 		ResultSet rs = null;
 		try {
 			_selectSourcesByTopic = getSelectSourceByTopicStatement();
+			_selectSourcesByTopic.setString(1, topic);
 			ArrayList<Source> sourceList = new ArrayList<Source>();
 			rs = _selectSourcesByTopic.executeQuery();
 			while(rs.next()) {
