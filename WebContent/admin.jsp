@@ -155,15 +155,16 @@
 			  <section class="mdl-grid site-max-width">
 			      <div class="demo-card-event mdl-cell mdl-card mdl-shadow--4dp event-card portfolio-card" style="width: 1000px;height: 255px;">
 				        <div class="mdl-card__title">
-				            <h2 class="mdl-card__title-text">Source Requests</h2>
-				        </div>
+				            <h2 class="mdl-card__title-text" style="margin-left: 40% !important">Source Requests</h2>
+				        </div><br>
 			          	<div id="login" >
 							<form action="" method="post">
-								 <table id="source_request" style="width:100%; color:white">
+								 <table id="source_request" align= "center" style="width:90%; color:white;height: 100px;text-align: center;">
 							        <tr>
 							            <th>Source</th>
 							            <th>Category</th>		
 							            <th>URL</th>
+							            <th></th>
 							        </tr>
 							        <tr>
 							        	<td>CNBC</td>
@@ -199,10 +200,11 @@
 							</form>
 						</div>
 			        </div>
+			        </section>
 			      </div>
-			  </section>
+			  
 			</div>
 		</div>
-      </div>
+      
 
 <%@ include file="footer.jsp" %>

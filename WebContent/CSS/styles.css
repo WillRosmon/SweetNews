@@ -235,3 +235,18 @@ footer .mdl-logo a {
 .authorDate{
 	margin-top: 25px;
 }
+
+#source_request {
+	    width: 100%;
+    color: white;
+    border-collapse: collapse;
+    border: 2px solid white;
+    text-align: center;
+}
+tr{
+	border-bottom: 2px solid white;
+	
+}
+td,th {
+	border-right: 2px solid white;
+}
