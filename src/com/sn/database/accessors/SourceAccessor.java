@@ -155,7 +155,7 @@ public class SourceAccessor {
 		sb.append(", ");
 		sb.append(DbConstants.SOURCE_COL_USERID);
 		sb.append(" ) ");
-		sb.append("VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? ");
+		sb.append("VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? );");
 		
 		_insertSource = connection.prepareStatement(sb.toString());
 		return _insertSource;
