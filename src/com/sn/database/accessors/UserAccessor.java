@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.sn.database.objects.User;
 import com.sn.database.utilities.ConnectionPool;
@@ -16,6 +17,7 @@ public class UserAccessor {
 	private PreparedStatement _insertUserStatement ;
 	private PreparedStatement _insertLoginUserStatement ;
 	private PreparedStatement _selectUserStatement ;
+	private PreparedStatement _selectAllUsersStatement ;
 	
 	public UserAccessor(Connection connection) {
 		this.connection = connection;
@@ -98,6 +100,36 @@ public class UserAccessor {
 		return null;
 	}
 		
+	public ArrayList<User> getUsers() {
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection connection = pool.getConnection();
+		
+		ResultSet rs = null;
+		ArrayList<User> users = new ArrayList<User>();
+		
+		try {
+			_selectAllUsersStatement = getUsersStatement();
+			rs = _selectAllUsersStatement.executeQuery();
+			while (rs.next())
+			{
+				User user = new User();
+				user.setFirstName(rs.getString(DbConstants.USER_COL_FIRSTNAME));
+				user.setFirstName(rs.getString(DbConstants.USER_COL_LASTNAME));
+				user.setFirstName(rs.getString(DbConstants.USER_COL_EMAIL));
+				user.setPassword(rs.getString(DbConstants.USERLOGIN_COL_PASSWORD));
+				users.add(user);
+			}
+			return users;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			cleanup(_selectAllUsersStatement, rs);
+			pool.freeConnection(connection);
+		}
+		return null;
+	}
+	
 	private PreparedStatement getSelectUserStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "+DbConstants.USER_TABLE+"."+DbConstants.USER_COL_FIRSTNAME+" , ");
@@ -111,6 +143,19 @@ public class UserAccessor {
 		sb.append(DbConstants.USERLOGIN_TABLE+"."+DbConstants.USERLOGIN_COL_USERNAME);
 		_selectUserStatement = connection.prepareStatement(sb.toString());
 		return _selectUserStatement;
+	}
+	
+	private PreparedStatement getUsersStatement() throws SQLException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT "+DbConstants.USER_TABLE+"."+DbConstants.USER_COL_FIRSTNAME+" , ");
+		sb.append(DbConstants.USER_TABLE+"."+DbConstants.USER_COL_LASTNAME+" , ");
+		sb.append(DbConstants.USER_TABLE+"."+DbConstants.USER_COL_EMAIL+" , ");
+		sb.append(DbConstants.USERLOGIN_TABLE+"."+DbConstants.USERLOGIN_COL_PASSWORD);
+		sb.append(" FROM ");
+		sb.append(DbConstants.USER_TABLE);
+		sb.append(" , "+DbConstants.USERLOGIN_TABLE);
+		_selectAllUsersStatement = connection.prepareStatement(sb.toString());
+		return _selectAllUsersStatement;
 	}
 	
 	private User asUser(ResultSet rs) throws SQLException{
