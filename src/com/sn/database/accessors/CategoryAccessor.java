@@ -150,7 +150,8 @@ public class CategoryAccessor {
 		ArrayList<Category> categories = new ArrayList<Category>();
 		
 		try {
-			_selectCategoryForUser = getUserCategoryStatement(user.getEmail());
+			_selectCategoryForUser = getUserCategoryStatement();
+			_selectCategoryForUser.setString(0, user.getEmail());
 			rs = _selectCategoryForUser.executeQuery();
 			
 			while(rs.next()) {
@@ -166,7 +167,7 @@ public class CategoryAccessor {
 		return null;
 	}
 	
-	private PreparedStatement getUserCategoryStatement(String email) throws SQLException {
+	private PreparedStatement getUserCategoryStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT * FROM ");
 		sb.append(DbConstants.CATEGORY_TABLE);
@@ -177,8 +178,7 @@ public class CategoryAccessor {
 		sb.append(" = ");
 		sb.append(DbConstants.USER_PREFERENCE_TABLE+"."+DbConstants.USER_PREFERENCE_COL_CATEGORYID);
 		sb.append(" and ");
-		sb.append(DbConstants.USER_PREFERENCE_TABLE+"."+DbConstants.USER_PREFERENCE_COL_USERID+" = ");
-		sb.append("'"+email+"';");
+		sb.append(DbConstants.USER_PREFERENCE_TABLE+"."+DbConstants.USER_PREFERENCE_COL_USERID+" = ?");
 		
 		_selectCategoryForUser = connection.prepareStatement(sb.toString());
 		return _selectCategoryForUser;
