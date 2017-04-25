@@ -29,12 +29,11 @@ public class CategoryAccessor {
 	
 /**************************************/	
 
-	public void insertCategory(int i,String asd) throws SQLException {
+	public void insertCategory(String category) throws SQLException {
 		try {
 			
 			_insertCategory = getInsertStatement();
-			_insertCategory.setInt(1, i+1);
-			_insertCategory.setString(2, asd);
+			_insertCategory.setString(1,category);
 			
 			_insertCategory.executeUpdate();
 		} catch (SQLException e) {
@@ -50,11 +49,9 @@ public class CategoryAccessor {
 		sb.append("INSERT INTO ");
 		sb.append(DbConstants.CATEGORY_TABLE);
 		sb.append(" ( ");
-		sb.append(DbConstants.CATEGORY_COL_CATEGORYID);
-		sb.append(", ");
 		sb.append(DbConstants.CATEGORY_COL_CATEGORYDESCRIPTION);
 		sb.append(" ) ");
-		sb.append("VALUES ( ?, ? ); ");
+		sb.append("VALUES ( ? ); ");
 		
 		_insertCategory = connection.prepareStatement(sb.toString());
 		return _insertCategory;
