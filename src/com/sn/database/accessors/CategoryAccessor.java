@@ -36,7 +36,7 @@ public class CategoryAccessor {
 			_insertCategory.setString(2, category.getCategory());
 
 			
-			_insertCategory.executeQuery();
+			_insertCategory.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

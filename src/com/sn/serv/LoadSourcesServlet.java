@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sn.api.util.APIConstants;
+import com.sn.create.bean.RetrieveSourcesBean;
+import com.sn.database.accessors.SourceAccessor;
 import com.sn.database.objects.Source;
 import com.sn.list.beans.CreateSourceListBean;
 
@@ -34,10 +36,18 @@ public class LoadSourcesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		RetrieveSourcesBean sourcesBean = new RetrieveSourcesBean();
+		sourcesBean.loadSources();
+		
 		List<Source> sourcesList = null;
 		CreateSourceListBean sourceListBean = new CreateSourceListBean();
 		sourcesList = sourceListBean.getSources();
 		request.setAttribute(APIConstants.SOURCES, sourcesList);
+		
+		for(Source s : sourcesList) {
+			
+		}
 		
 	}
 

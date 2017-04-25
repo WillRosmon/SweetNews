@@ -28,7 +28,7 @@ public class UserServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("Entered User Servlet");
 		HttpSession session = request.getSession();
 		String url = "/index.jsp";
 		String action = request.getParameter("action");
@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		connection = pool.getConnection();
 		UserAccessor userAccessor = new UserAccessor(connection);
-		
+		System.out.println(action);
 		
 		if(action == null){
 			action = "join";
@@ -102,21 +102,27 @@ public class UserServlet extends HttpServlet {
 			String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String confirm_password = request.getParameter("confirm_password");
+            String confirm_password = request.getParameter("confirmpassword");
+            System.out.println("Retrieved Params");
             ArrayList<User> users = userAccessor.getUsers();
             
             for (User singleUser : users) {
                 if(email.equals(singleUser.getEmail())){
+                	System.out.println("E-mail in DB");
                 	session.setAttribute("msg", msg);
                 	url = "/signup.jsp";
                 }
             }
             if (!password.equals(confirm_password)){
+            	System.out.println(password);
+            	System.out.println(confirm_password);
             	msg = "Password Mismatch occured.";
 				session.setAttribute("msg", msg);
+				System.out.println("Password Mismatch");
 				url = "/signup.jsp";
             }
             else{
+            	System.out.println("Registering User");
            user.setFirstName(name); 
            user.setEmail(email);
            user.setPassword(password);
@@ -157,7 +163,7 @@ public class UserServlet extends HttpServlet {
 			//The source that is added does not need to be shown on the site anywhere
 		}
 		
-		
+		System.out.println(url);
 		getServletContext()
         .getRequestDispatcher(url)
         .forward(request,response);  

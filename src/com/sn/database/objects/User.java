@@ -40,4 +40,9 @@ public class User {
 		this.interests = interests;
 	}
 	
+	public void addInterest(String interest) {
+		if(this.interests != null) {
+			interests.add(interest);
+		}
+	}
 }

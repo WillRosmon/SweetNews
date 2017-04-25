@@ -91,9 +91,7 @@ public class ArticleAccessor {
 /**********************/
 	
 	public List<Article> getSelectArticlesByTopicStatement(Category category) {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
-		
+
 		ResultSet rs = null;
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
@@ -110,7 +108,6 @@ public class ArticleAccessor {
 			e.printStackTrace();
 		} finally {
 			cleanup(_selectArticlesByTopicStatement, rs);
-			pool.freeConnection(connection);
 		}
 		
 		return null;
@@ -148,9 +145,7 @@ public class ArticleAccessor {
 
 /****************************/
 	public List<Article> getSelectArticlesBySourceStatement(Source source) {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
-		
+
 		ResultSet rs = null;
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
@@ -167,7 +162,6 @@ public class ArticleAccessor {
 			e.printStackTrace();
 		} finally {
 			cleanup(_selectArticlesBySourceStatement, rs);
-			pool.freeConnection(connection);
 		}
 		
 		return null;

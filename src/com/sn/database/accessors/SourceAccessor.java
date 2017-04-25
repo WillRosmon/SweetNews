@@ -25,9 +25,6 @@ public class SourceAccessor {
 	}
 	
 	public List<Source> selectAllSources() {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
-		
 		ResultSet rs = null;
 		ArrayList<Source> sources = new ArrayList<Source>();
 		
@@ -44,7 +41,6 @@ public class SourceAccessor {
 			e.printStackTrace();
 		} finally {
 			cleanup(_selectAllSources, rs);
-			pool.freeConnection(connection);
 		}
 		return null;
 	}
@@ -77,11 +73,10 @@ public class SourceAccessor {
 			_insertSource.setString(4, source.getCategory());
 			_insertSource.setString(5, source.getLanguage());
 			_insertSource.setString(6, source.getCountry());
-			_insertSource.setString(7, source.getUrlLogo());
-			_insertSource.setString(8, source.getApprovalStatus());
-			_insertSource.setString(9, source.getUserId());
+			_insertSource.setString(7, source.getApprovalStatus());
+			_insertSource.setString(8, source.getId());
 			
-			_insertSource.executeQuery();
+			_insertSource.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,13 +143,13 @@ public class SourceAccessor {
 		sb.append(", ");
 		sb.append(DbConstants.SOURCE_COL_COUNTRY);
 		sb.append(", ");
-		sb.append(DbConstants.SOURCE_COL_URLLOGO);
-		sb.append(", ");
 		sb.append(DbConstants.SOURCE_COL_APPROVALSTATUS);
 		sb.append(", ");
-		sb.append(DbConstants.SOURCE_COL_USERID);
+//		sb.append(DbConstants.SOURCE_COL_USERID);
+//		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_SOURCE_ID);
 		sb.append(" ) ");
-		sb.append("VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? );");
+		sb.append("VALUES ( ?, ?, ?, ?, ?, ?, ?, ? );");
 		
 		_insertSource = connection.prepareStatement(sb.toString());
 		return _insertSource;
