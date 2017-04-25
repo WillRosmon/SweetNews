@@ -14,7 +14,6 @@ public class Source {
 	private String category;
 	private String language;
 	private String country;
-	private String urlLogo;
 	private String userId;
 	private String approvalStatus;
 	
@@ -26,7 +25,6 @@ public class Source {
 		this.category = null;
 		this.language = null;
 		this.country = null;
-		this.urlLogo = null;
 		this.approvalStatus = null;
 	}
 
@@ -84,14 +82,6 @@ public class Source {
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-	
-	public String getUrlLogo() {
-		return urlLogo;
-	}
-
-	public void setUrlLogo(String urlLogo) {
-		this.urlLogo = urlLogo;
 	}
 
 	public String getUserId() {

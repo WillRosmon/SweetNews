@@ -34,7 +34,6 @@ public class CreateSourceListBean {
 				source.setLanguage(getProperty(jsonObj, APIConstants.LANGUAGE));
 				source.setName(getProperty(jsonObj, APIConstants.NAME));
 				source.setUrl(getProperty(jsonObj, APIConstants.URL));
-				source.setUrlLogo(getProperty(jsonObj, APIConstants.LOGO_URLS));
 				
 				sources.add(source);
 			}

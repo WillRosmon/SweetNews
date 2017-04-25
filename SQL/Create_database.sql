@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `sweetnews`.`category` (
   `CategoryId` INT(11) NOT NULL AUTO_INCREMENT,
   `CategoryDescription` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`CategoryId`),
+  UNIQUE ('CategoryDescription'),
   INDEX `cdesc` (`CategoryDescription` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -38,7 +39,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `sweetnews`.`source` (
   `SourceId` VARCHAR(256) NOT NULL,
   `Name` VARCHAR(60) NULL DEFAULT NULL,
-  `Description` VARCHAR(256) NULL DEFAULT NULL,
+  `Description` VARCHAR(2000) NULL DEFAULT NULL,
   `Url` VARCHAR(2000) NULL DEFAULT NULL,
   `Category` VARCHAR(60) NULL DEFAULT NULL,
   `Language` VARCHAR(45) NULL DEFAULT NULL,
