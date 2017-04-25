@@ -15,6 +15,7 @@
 							<input type="password" name="password" placeholder="Password" required/><br><br>
 							<input type="password" name="confirmpassword" placeholder="Confirm Password" required/><br><br>
 							<input type="submit" value="Sign Up" id="SignUpButton" />
+							
 						</form>
 					</div>
 				</div>

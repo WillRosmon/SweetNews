@@ -10,11 +10,11 @@
 					<div class="mdl-card__supporting-text" style="margin-left: 45%;color: white;">
 						<form action="user" method="post">
 							<input type="hidden" name="action" value="preference" />
-							<input type="checkbox" name="preference" name="business">Business<br><br>
-							<input type="checkbox" name="preference" name="technology">Technology<br><br>
-							<input type="checkbox" name="preference" name="sports">Sports<br><br>
-							<input type="checkbox" name="preference" name="travel">Travel<br><br>
-							<input type="checkbox" name="preference" name="politics">Politics<br><br><br>
+							<input type="checkbox" name="preference" value="business">Business<br><br>
+							<input type="checkbox" name="preference" value="technology">Technology<br><br>
+							<input type="checkbox" name="preference" value="sports">Sports<br><br>
+							<input type="checkbox" name="preference" value="travel">Travel<br><br>
+							<input type="checkbox" name="preference" value="politics">Politics<br><br><br>
 							<input type="submit" value="Submit" id="choosepreference" />
 						</form>
 					</div>

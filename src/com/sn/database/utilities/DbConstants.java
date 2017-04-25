@@ -16,7 +16,7 @@ public class DbConstants {
 	/*User Table*/
 	public static final String USER_COL_USERID= "UserId";
 	public static final String USER_COL_FIRSTNAME= "FirstName";
-	public static final String USER_COL_LASTNAME= "LadtName";
+	public static final String USER_COL_LASTNAME= "LastName";
 	public static final String USER_COL_DOB= "DOB";
 	public static final String USER_COL_EMAIL= "Email";
 
