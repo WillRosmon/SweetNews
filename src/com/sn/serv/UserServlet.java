@@ -43,6 +43,28 @@ public class UserServlet extends HttpServlet {
 		System.out.println(action);
 		
 		
+		//Populate index.jsp with sample articles
+		RetrieveArticlesBean rab = new RetrieveArticlesBean();
+		List<Article> article = rab.retrieveArticlesByTopic("ap");
+		int beginIndex = 0;
+		if(article.isEmpty()){
+			beginIndex = -1;
+		}else{
+			beginIndex = article.size() - 4;
+		}
+		
+		if(beginIndex >= 0){
+			List<Article> returnArticles = new ArrayList<Article>();
+			for(int i = beginIndex; i < article.size(); i++){
+				returnArticles.add(article.get(i));
+			}
+			session.setAttribute("returnArticles", returnArticles);
+		}else{
+			throw new RuntimeException("No Articles Found!");
+		}
+
+		
+		
 		if(action == null){
 			action = "join";
 		}
@@ -196,6 +218,16 @@ public class UserServlet extends HttpServlet {
 		if(action.equals("disapprove")){
 			//TODO: Set the submitted source to disapproved in DB
 			//The source that is added does not need to be shown on the site anywhere
+		}
+		
+		else if(action.equals("logout")){
+			url = "/index.jsp";
+			String userLogged = (String) session.getAttribute("theUser");
+            if(userLogged != null){
+                session.invalidate();
+                request.logout();
+                url = "/home.jsp";
+            }
 		}
 		
 		System.out.println(url);
