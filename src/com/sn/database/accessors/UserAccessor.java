@@ -33,16 +33,17 @@ public class UserAccessor {
 		try {
 			_insertUserStatement = getInsertStatement();
 			_insertUserStatement.setString(1, user.getFirstName());
-			_insertUserStatement.setString(2, user.getLastName());
-			_insertUserStatement.setString(3, user.getEmail());
+			_insertUserStatement.setString(2, "asd");
+			_insertUserStatement.setString(3, null);
+			_insertUserStatement.setString(4, user.getEmail());
 			
 			_insertUserStatement.executeUpdate();
 			
 			_insertLoginUserStatement=getLoginUserInsertStatement();
 			_insertLoginUserStatement.setString(1, user.getEmail());
-			_insertLoginUserStatement.setString(1, user.getPassword());
+			_insertLoginUserStatement.setString(2, user.getPassword());
 			
-			_insertLoginUserStatement.executeQuery();
+			_insertLoginUserStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,9 +62,10 @@ public class UserAccessor {
 		sb.append(", ");
 		sb.append(DbConstants.USER_COL_LASTNAME);
 		sb.append(" , ");
-		sb.append(DbConstants.USER_COL_EMAIL);
-		sb.append(" ) " );
-		sb.append(" VALUES ( ?, ? ,?); ");
+		sb.append(DbConstants.USER_COL_DOB);
+		sb.append(" , ");
+		sb.append(DbConstants.USER_COL_EMAIL+")");
+		sb.append("VALUES ( ?, ? ,?,?); ");
 		
 		_insertUserStatement = connection.prepareStatement(sb.toString());
 		return _insertUserStatement;
@@ -86,8 +88,8 @@ public class UserAccessor {
 	
 	
 	public User getUser(String email) {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
+		//ConnectionPool pool = ConnectionPool.getInstance();
+		//Connection connection = pool.getConnection();
 		
 		ResultSet rs = null;
 		
@@ -101,14 +103,14 @@ public class UserAccessor {
 			e.printStackTrace();
 		} finally {
 			cleanup(_selectUserStatement, rs);
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 		}
 		return null;
 	}
 		
 	public ArrayList<User> getUsers() {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
+		//ConnectionPool pool = ConnectionPool.getInstance();
+		//Connection connection = pool.getConnection();
 		
 		ResultSet rs = null;
 		ArrayList<User> users = new ArrayList<User>();
@@ -131,7 +133,7 @@ public class UserAccessor {
 			e.printStackTrace();
 		} finally {
 			cleanup(_selectAllUsersStatement, rs);
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 		}
 		return null;
 	}

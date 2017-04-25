@@ -26,7 +26,7 @@ public class RetrieveSourcesBean {
 				Category category = new Category();
 				category.setCategory(source.getCategory());
 				category.setCategoryId(0);
-				categoryAccessor.insertCategory(category);
+				categoryAccessor.insertCategory(category.getCategory());
 				sourceAccessor.insertSource(source);
 				
 			}

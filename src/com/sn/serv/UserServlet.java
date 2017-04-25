@@ -3,6 +3,7 @@ package com.sn.serv;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sn.database.accessors.CategoryAccessor;
 import com.sn.database.accessors.UserAccessor;
 import com.sn.database.objects.*;
 import com.sn.database.utilities.ConnectionPool;
@@ -39,6 +41,29 @@ public class UserServlet extends HttpServlet {
 		connection = pool.getConnection();
 		UserAccessor userAccessor = new UserAccessor(connection);
 		System.out.println(action);
+		
+		
+		//Populate index.jsp with sample articles
+		RetrieveArticlesBean rab = new RetrieveArticlesBean();
+		List<Article> article = rab.retrieveArticlesByTopic("ap");
+		int beginIndex = 0;
+		if(article.isEmpty()){
+			beginIndex = -1;
+		}else{
+			beginIndex = article.size() - 4;
+		}
+		
+		if(beginIndex >= 0){
+			List<Article> returnArticles = new ArrayList<Article>();
+			for(int i = beginIndex; i < article.size(); i++){
+				returnArticles.add(article.get(i));
+			}
+			session.setAttribute("returnArticles", returnArticles);
+		}else{
+			throw new RuntimeException("No Articles Found!");
+		}
+
+		
 		
 		if(action == null){
 			action = "join";
@@ -72,7 +97,7 @@ public class UserServlet extends HttpServlet {
 			//TODO: If it does exist, set the role of the user and use the session attributes below
 			//session.setAttribute("theUser",user);
 			//session.setAttribute("theAdmin",admin);
-			else if (userbean.checkUserType(user).equals("Participant")){
+			else if (!userbean.checkUserType(user).equals("admin")){
                 
                 //set as session attribute
                 session.setAttribute("theUser", user);
@@ -81,7 +106,7 @@ public class UserServlet extends HttpServlet {
             }
             
             //Code to check if User Type is Admin
-            else if (userbean.checkUserType(user).equals("Admin")){
+            else if (userbean.checkUserType(user).equals("admin")){
                 
                 //set as session attribute
                 session.setAttribute("theAdmin", user);
@@ -104,10 +129,19 @@ public class UserServlet extends HttpServlet {
             String password = request.getParameter("password");
             String confirm_password = request.getParameter("confirmpassword");
             System.out.println("Retrieved Params");
-            ArrayList<User> users = userAccessor.getUsers();
+            //ArrayList<User> users = userAccessor.getUsers();
             
+            user.setFirstName(name); 
+            user.setEmail(email);
+            user.setPassword(password);
+            UserBean userbean = new UserBean();
+            userbean.addUser(user);
+           /* 
             for (User singleUser : users) {
-                if(email.equals(singleUser.getEmail())){
+            if(user == null){
+            	
+            }*/
+                 /* if(email.equals(singleUser.getEmail())){
                 	System.out.println("E-mail in DB");
                 	session.setAttribute("msg", msg);
                 	url = "/signup.jsp";
@@ -121,29 +155,52 @@ public class UserServlet extends HttpServlet {
 				System.out.println("Password Mismatch");
 				url = "/signup.jsp";
             }
-            else{
-            	System.out.println("Registering User");
-           user.setFirstName(name); 
-           user.setEmail(email);
-           user.setPassword(password);
-           UserBean userbean = new UserBean();
-           userbean.addUser(user);
+            else{*/
+           
             
                 
                 
                 //set as session attribute
                 session.setAttribute("theUser", user);
-                //forward url to main.jsp
-                url="/main.jsp";
+                //forward url
+                url="/userpreference.jsp";
             }
-		}
+		
         
 		
 		
 		if(action.equals("preference")){
 			//TODO: Get selected preferences from the radio buttons and store them to the user object
+		CategoryAccessor categoryAccess=new CategoryAccessor(connection);
 		String[] preference = request.getParameterValues("preference");
 		
+/*		List<String> categoryList=new ArrayList<String>();
+		categoryList.add("business");
+		categoryList.add("sports");
+		categoryList.add("technology");
+		categoryList.add("travel");
+		categoryList.add("politics");
+		try{
+		for(int i=0;i<categoryList.size();i++)
+		      categoryAccess.insertCategory(i+1,categoryList.get(i));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}*/
+		Category ca=new Category();
+		user=(User) session.getAttribute("theUser");
+		System.out.println(user.getEmail());;
+		try{
+		for(int i=0; i<preference.length;i++)	
+		    categoryAccess.insertUserCategory(preference[i],user);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		url="/main.jsp";
 			
 		}
 		
@@ -167,6 +224,16 @@ public class UserServlet extends HttpServlet {
 		if(action.equals("disapprove")){
 			//TODO: Set the submitted source to disapproved in DB
 			//The source that is added does not need to be shown on the site anywhere
+		}
+		
+		else if(action.equals("logout")){
+			url = "/index.jsp";
+			String userLogged = (String) session.getAttribute("theUser");
+            if(userLogged != null){
+                session.invalidate();
+                request.logout();
+                url = "/home.jsp";
+            }
 		}
 		
 		System.out.println(url);

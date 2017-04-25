@@ -29,12 +29,11 @@ public class CategoryAccessor {
 	
 /**************************************/	
 
-	public void insertCategory(Category category) throws SQLException {
+	public void insertCategory(String category) throws SQLException {
 		try {
+			
 			_insertCategory = getInsertStatement();
-			_insertCategory.setInt(1, category.getCategoryId());
-			_insertCategory.setString(2, category.getCategory());
-
+			_insertCategory.setString(1,category);
 			
 			_insertCategory.executeUpdate();
 		} catch (SQLException e) {
@@ -50,11 +49,9 @@ public class CategoryAccessor {
 		sb.append("INSERT INTO ");
 		sb.append(DbConstants.CATEGORY_TABLE);
 		sb.append(" ( ");
-		sb.append(DbConstants.CATEGORY_COL_CATEGORYID);
-		sb.append(", ");
 		sb.append(DbConstants.CATEGORY_COL_CATEGORYDESCRIPTION);
 		sb.append(" ) ");
-		sb.append("VALUES ( ?, ? ); ");
+		sb.append("VALUES ( ? ); ");
 		
 		_insertCategory = connection.prepareStatement(sb.toString());
 		return _insertCategory;
@@ -64,9 +61,7 @@ public class CategoryAccessor {
 /**************************************/	
 
 	public List<Category> selectCategory() {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
-		
+	
 		ResultSet rs = null;
 		ArrayList<Category> categories = new ArrayList<Category>();
 		
@@ -83,7 +78,6 @@ public class CategoryAccessor {
 			e.printStackTrace();
 		} finally {
 			cleanup(_selectCategory, rs);
-			pool.freeConnection(connection);
 		}
 		return null;
 	}
@@ -105,16 +99,17 @@ public class CategoryAccessor {
 	
 /**************************************/	
 
-	public void insertUserCategory(Category category,User user) throws SQLException {
+	public void insertUserCategory(String category,User user) throws SQLException {
 		try {
 			
-			
+
 			_insertCategoryForUser = getInsertUserCategoryStatement();
 			_insertCategoryForUser.setString(1, user.getEmail());
-			_insertCategoryForUser.setInt(2, category.getCategoryId());
+			_insertCategoryForUser.setString(2, category);
 
 			
-			_insertCategoryForUser.executeQuery();
+			_insertCategoryForUser.executeUpdate();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,9 +138,7 @@ public class CategoryAccessor {
 	/**************************************/	
 
 	public List<Category> selectUserCategory(User user) {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
-		
+
 		ResultSet rs = null;
 		ArrayList<Category> categories = new ArrayList<Category>();
 		
@@ -162,7 +155,6 @@ public class CategoryAccessor {
 			e.printStackTrace();
 		} finally {
 			cleanup(_selectCategoryForUser, rs);
-			pool.freeConnection(connection);
 		}
 		return null;
 	}
