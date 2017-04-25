@@ -150,7 +150,13 @@ public class UserServlet extends HttpServlet {
 		
 		//Handle source addition
 		if(action.equals("add")){
-			//TODO: Get the source information added by the user and store it in the DB
+			String source = request.getParameter("source");
+			String articleUrl = request.getParameter("URL");
+			String articleCategory = request.getParameter("Category");
+			Article newArticle = new Article();
+			newArticle.setUrl(articleUrl);
+			newArticle.setSource(source);
+			
 		}
 		
 		//Handle admin approval
