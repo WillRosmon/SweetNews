@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sn.create.bean.RetrieveArticlesBean;
+import com.sn.create.bean.RetrieveSourcesBean;
 import com.sn.database.accessors.CategoryAccessor;
 import com.sn.database.accessors.UserAccessor;
 import com.sn.database.objects.*;
@@ -153,7 +154,35 @@ public class UserServlet extends HttpServlet {
 			
 		}
 		
+		//TODO: Handle displaying sources/articles based on user preferences
+		//ONLY 3 FOR EACH PREFERENCE!
+			RetrieveSourcesBean rsb = new RetrieveSourcesBean();
+			//TODO: Get user and loop through his preferences.
+			/*
+			 * for(UserBean user : user){
+			 * 		User user = user.getPreference(user);
+			 */
+//			List<Source> userSources = rsb.getSourcesByCategory("");
+//			int beginIndex = 0;
+//			if(article.isEmpty()){
+//				beginIndex = -1;
+//			}else{
+//				beginIndex = article.size() - 4;
+//			}
+//			
+//			if(beginIndex >= 0){
+//				List<Article> returnArticles = new ArrayList<Article>();
+//				for(int i = beginIndex; i < article.size(); i++){
+//					returnArticles.add(article.get(i));
+//				}
+//				session.setAttribute("returnArticles", returnArticles);
+//			}else{
+//				throw new RuntimeException("No Articles Found!");
+//			}
 		
+		
+			
+			
 		//Handle source addition
 		if(action.equals("add")){
 			String source = request.getParameter("source");

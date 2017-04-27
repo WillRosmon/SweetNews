@@ -13,6 +13,10 @@ import com.sn.list.beans.CreateSourceListBean;
 
 public class RetrieveSourcesBean {
 
+	public RetrieveSourcesBean(){
+		
+	}
+	
 	public void loadSources() {
 		CreateSourceListBean sourceListBean = new CreateSourceListBean();
 		List<Source> sourceList = sourceListBean.getSources();
