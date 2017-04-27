@@ -14,10 +14,7 @@ public class DbConstants {
 	
 	
 	/*User Table*/
-	public static final String USER_COL_USERID= "UserId";
-	public static final String USER_COL_FIRSTNAME= "FirstName";
-	public static final String USER_COL_LASTNAME= "LastName";
-	public static final String USER_COL_DOB= "DOB";
+	public static final String USER_COL_NAME= "Name";
 	public static final String USER_COL_EMAIL= "Email";
 
 	
@@ -32,8 +29,8 @@ public class DbConstants {
 	
 	
 	/*User-Preference Table*/
-	public static final String USER_PREFERENCE_COL_USERID= "UserId";
-	public static final String USER_PREFERENCE_COL_CATEGORYID= "CategoryId";
+	public static final String USER_PREFERENCE_COL_USERNAME= "UserName";
+	public static final String USER_PREFERENCE_COL_CATEGORY= "Category";
 	
 	
 	/*Source Table*/
@@ -48,7 +45,9 @@ public class DbConstants {
 	public static final String SOURCE_COL_APPROVALSTATUS= "ApprovalStatus";
 	public static final String SOURCE_COL_SOURCE_ID = "SourceId";
 
+	
 	/*Article Table*/
+	public static final String ARTICLE_COL_ARTICLEID= "ArticleId";
 	public static final String ARTICLE_COL_AUTHOR= "Author";
 	public static final String ARTICLE_COL_DESCRIPTION= "Description";
 	public static final String ARTICLE_COL_TITLE= "Title";

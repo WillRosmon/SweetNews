@@ -125,9 +125,9 @@ public class CategoryAccessor {
 		sb.append("INSERT INTO ");
 		sb.append(DbConstants.USER_PREFERENCE_TABLE);
 		sb.append(" ( ");
-		sb.append(DbConstants.USER_PREFERENCE_COL_USERID);
+		sb.append(DbConstants.USER_PREFERENCE_COL_USERNAME);
 		sb.append(", ");
-		sb.append(DbConstants.USER_PREFERENCE_COL_CATEGORYID);
+		sb.append(DbConstants.USER_PREFERENCE_COL_CATEGORY);
 		sb.append(" ) ");
 		sb.append("VALUES ( ?, ? ); ");
 		
@@ -168,11 +168,11 @@ public class CategoryAccessor {
 		sb.append(" , ");
 		sb.append(DbConstants.USER_PREFERENCE_TABLE);
 		sb.append(" where ");
-		sb.append(DbConstants.CATEGORY_TABLE+"."+DbConstants.CATEGORY_COL_CATEGORYID);
+		sb.append(DbConstants.CATEGORY_TABLE+"."+DbConstants.CATEGORY_COL_CATEGORYDESCRIPTION);
 		sb.append(" = ");
-		sb.append(DbConstants.USER_PREFERENCE_TABLE+"."+DbConstants.USER_PREFERENCE_COL_CATEGORYID);
+		sb.append(DbConstants.USER_PREFERENCE_TABLE+"."+DbConstants.USER_PREFERENCE_COL_CATEGORY);
 		sb.append(" and ");
-		sb.append(DbConstants.USER_PREFERENCE_TABLE+"."+DbConstants.USER_PREFERENCE_COL_USERID+" = ?");
+		sb.append(DbConstants.USER_PREFERENCE_TABLE+"."+DbConstants.USER_PREFERENCE_COL_USERNAME+" = ?");
 		
 		_selectCategoryForUser = connection.prepareStatement(sb.toString());
 		return _selectCategoryForUser;

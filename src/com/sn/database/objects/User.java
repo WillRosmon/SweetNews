@@ -5,7 +5,6 @@ import java.util.List;
 public class User {
 	private String email;
 	private String firstName;
-	private String lastName;
 	private String password;
 	private List<String> interests;
 	
@@ -26,12 +25,6 @@ public class User {
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 	public List<String> getInterests() {
 		return interests;
