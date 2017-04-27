@@ -3,10 +3,9 @@
 	<div class="site-content">
 		<div class="container">
 			<div class="mdl-grid site-max-width">
-				<div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp welcome-card portfolio-card">
-<!-- 					<div class="mdl-card__title mdl-card--expand"> -->
+				<div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp welcome-card portfolio-card">]
 						<h2 class="mdl-card__title-text" style="margin-right: 32%">Sign Up to Create a New User</h2>
-<!-- 					</div> -->
+						<p>${msg}</p>
 					<div class="mdl-card__supporting-text" style="margin-left:38%">
 						<form action="user" method="post">
 							<input type="hidden" name="action" value="create" />
