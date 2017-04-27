@@ -45,7 +45,7 @@ public class UserServlet extends HttpServlet {
 		
 		
 		//Populate index.jsp with sample articles
-		/*RetrieveArticlesBean rab = new RetrieveArticlesBean();
+		RetrieveArticlesBean rab = new RetrieveArticlesBean();
 		List<Article> article = rab.retrieveArticlesByTopic("ap");
 		int beginIndex = 0;
 		if(article.isEmpty()){
@@ -72,7 +72,7 @@ public class UserServlet extends HttpServlet {
 		if(action.equals("join")){
 			url = "/index.jsp";
 		}
-*/		
+	
 		
 		//Handle Login Form..
 		if(action.equals("login")){
