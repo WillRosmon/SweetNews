@@ -104,6 +104,7 @@
 								<br/>
 								<br/>
 								<input type="submit" value="Log in" id="loginButton" />
+								<p style="color: red">${msg}</p>
 							</form>
 						</div>
 			        </div>

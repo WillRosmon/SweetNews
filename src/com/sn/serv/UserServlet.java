@@ -2,6 +2,7 @@ package com.sn.serv;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class UserServlet extends HttpServlet {
 		System.out.println(action);
 		
 		
-		//Populate index.jsp with sample articles
+	/*	//Populate index.jsp with sample articles
 		RetrieveArticlesBean rab = new RetrieveArticlesBean();
 		List<Article> article = rab.retrieveArticlesByTopic("ap");
 		int beginIndex = 0;
@@ -63,7 +64,7 @@ public class UserServlet extends HttpServlet {
 			session.setAttribute("returnArticles", returnArticles);
 		}else{
 			throw new RuntimeException("No Articles Found!");
-		}
+		} */
 
 		
 		
@@ -127,16 +128,31 @@ public class UserServlet extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             
-            user.setFirstName(name); 
-            user.setEmail(email);
-            user.setPassword(password);
-            
             UserBean userbean = new UserBean();
-            userbean.addUser(user);
-            
-            session.setAttribute("theUser", user);
-            
-            url="/userpreference.jsp";
+            try {
+				User testuser = userbean.getUser(email);
+            	if (testuser != null)
+				{
+					session.setAttribute("msg", msg);
+					url = "/signup.jsp";
+				}
+				
+				else
+				{
+				user.setFirstName(name); 
+				user.setEmail(email);
+				user.setPassword(password);
+				
+				userbean.addUser(user);
+				
+				session.setAttribute("theUser", user);
+				
+				url="/userpreference.jsp";
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
           }
 		
         

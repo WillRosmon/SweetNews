@@ -58,6 +58,20 @@ public class UserBean {
 		pool.freeConnection(connection);
 	}
 	
+public User getUser(String email) throws SQLException {
+		
+		Connection connection = null;
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.getConnection();
+		
+		UserAccessor userAccessor = new UserAccessor(connection);
+		
+		User user = userAccessor.getUser(email);
+		
+		pool.freeConnection(connection);
+		return user;
+}
+
 	public boolean login (User user) {
 		
 		User loginuser=new User();
