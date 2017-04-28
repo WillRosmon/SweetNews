@@ -15,7 +15,7 @@ public class Source {
 	private String language;
 	private String country;
 	private String userId;
-	private String approvalStatus;
+	private int approvalStatus;
 	
 	public Source() {
 		this.id = null;
@@ -25,7 +25,7 @@ public class Source {
 		this.category = null;
 		this.language = null;
 		this.country = null;
-		this.approvalStatus = null;
+		this.approvalStatus = 0;
 	}
 
 	public String getId() {
@@ -92,11 +92,11 @@ public class Source {
 		this.userId = userId;
 	}
 
-	public String getApprovalStatus() {
+	public int getApprovalStatus() {
 		return approvalStatus;
 	}
 
-	public void setApprovalStatus(String approvalStatus) {
+	public void setApprovalStatus(int approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
 

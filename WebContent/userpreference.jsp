@@ -14,6 +14,10 @@
 							<input type="checkbox" name="preference" value="technology">Technology<br><br>
 							<input type="checkbox" name="preference" value="sports">Sports<br><br>
 							<input type="checkbox" name="preference" value="travel">Travel<br><br>
+							<input type="checkbox" name="preference" value="general">General<br><br>
+							<input type="checkbox" name="preference" value="gaming">Gaming<br><br>
+							<input type="checkbox" name="preference" value="entertainment">Entertainment<br><br>
+							<input type="checkbox" name="preference" value="music">Music<br><br>
 							<input type="checkbox" name="preference" value="politics">Politics<br><br><br>
 							<input type="submit" value="Submit" id="choosepreference" />
 						</form>

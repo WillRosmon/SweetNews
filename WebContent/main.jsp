@@ -1,4 +1,8 @@
 <%@include file="header.jsp" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.sn.database.objects.Article"%>
+
+
 <%-- <%@include file="sidebar.jsp" %> --%>
       <div class="mdl-layout__drawer mdl-layout--small-screen-only">
         <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font"><a class="mdl-navigation__link" href="index.html">Home</a><a class="mdl-navigation__link" href="portfolio.html">Portfolio</a><a class="mdl-navigation__link" href="about.html">About</a><a class="mdl-navigation__link" href="contact.html">Contact</a>
@@ -53,37 +57,44 @@
 					<h2 style="font-size:30px;">Politics</h2>
 				</div>
 				<br/>
+				<% 
+			        	ArrayList<Article> articles = (ArrayList)session.getAttribute("articles");
+			         	Article article = articles.get(1); %>
 			    <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
 			        <div class="mdl-card__media">
-			            <img class="article-image" src="http://binaryapi.ap.org/fe34d11f3ed6437e98b4004315158613/460x.jpg" border="0" alt="">
+			            <img class="article-image" src="<%=article.getUrlToImage() %>" border="0" alt="">
 			        </div>
 			        <div class="mdl-card__title">
-			            <h2 class="mdl-card__title-text">US officials say pirates have returned to waters off Somalia</h2>
+			        
+			        
+			            <h2 class="mdl-card__title-text"><%=article.getTitle() %></h2>
 			        </div>
 			        <div class="mdl-card__supporting-text">
-			        	DJIBOUTI (AP) - Pirates have returned to the waters off Somalia, but the spike in attacks on commercial shipping does not yet constitute a trend, senior U.S. officials said Sunday. The attacks follow about a five-year...
+			        	<%=article.getDescription() %>
 			        </div>
 			    </div>
+			    <% article =articles.get(0); %>
 			    <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
 			        <div class="mdl-card__media">
-			            <img class="article-image" src="http://i2.cdn.cnn.com/cnnnext/dam/assets/170419164156-06-french-presidential-election-run-up-marine-le-pen-super-tease.jpg" border="0" alt="">
+			            <img class="article-image" src="<%=article.getUrlToImage() %>" border="0" alt="">
 			        </div>
 			        <div class="mdl-card__title">
-			            <h2 class="mdl-card__title-text">Why you should care about the French election</h2>
+			            <h2 class="mdl-card__title-text"><%=article.getTitle() %></h2>
 			        </div>
 			        <div class="mdl-card__supporting-text">
-			            A presidential election in France is not usually the sort of thing that I would tell you to pay attention to. After all, it's hard enough to convince people that they should pay attention to elections in this country.
+			            <%=article.getDescription() %>
 			        </div>
 			    </div>
+			    <% article =articles.get(3); %>
 			    <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
 			        <div class="mdl-card__media">
-			            <img class="article-image" src="https://static01.nyt.com/images/2017/04/12/us/00comey1/00comey1-facebookJumbo.jpg" border="0" alt="">
+			            <img class="article-image" src="<%=article.getUrlToImage()%>" border="0" alt="">
 			        </div>
 			        <div class="mdl-card__title">
-			            <h2 class="mdl-card__title-text">Comey Tried to Shield the F.B.I. From Politics. Then He Shaped an Election.</h2>
+			            <h2 class="mdl-card__title-text"><%=article.getTitle() %></h2>
 			        </div>
 			        <div class="mdl-card__supporting-text">
-			            As the F.B.I. investigated Hillary Clinton and the Trump campaign, James B. Comey tried to keep the bureau out of politics but plunged it into the center of a bitter election.
+			            <%=article.getDescription() %>
 			        </div>
 			    </div>
 			</section>

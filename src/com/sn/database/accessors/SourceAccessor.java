@@ -67,14 +67,15 @@ public class SourceAccessor {
 	public void insertSource(Source source) throws SQLException {
 		try {
 			_insertSource = getInsertStatement();
-			_insertSource.setString(1, source.getName());
-			_insertSource.setString(2, source.getDescription());
-			_insertSource.setString(3, source.getUrl());
-			_insertSource.setString(4, source.getCategory());
-			_insertSource.setString(5, source.getLanguage());
-			_insertSource.setString(6, source.getCountry());
-			_insertSource.setString(7, source.getApprovalStatus());
-			_insertSource.setString(8, source.getId());
+			_insertSource.setString(2, source.getName());
+			_insertSource.setString(3, source.getDescription());
+			_insertSource.setString(4, source.getUrl());
+			_insertSource.setString(5, source.getCategory());
+			_insertSource.setString(6, source.getLanguage());
+			_insertSource.setString(7, source.getCountry());
+			_insertSource.setString(8, "image");
+			_insertSource.setInt(9, source.getApprovalStatus());
+			_insertSource.setString(1, source.getId());
 			
 			_insertSource.executeUpdate();
 		} catch (SQLException e) {
@@ -131,6 +132,8 @@ public class SourceAccessor {
 		sb.append("INSERT INTO ");
 		sb.append(DbConstants.SOURCE_TABLE);
 		sb.append(" ( ");
+		sb.append(DbConstants.SOURCE_COL_SOURCE_ID);
+		sb.append(", ");
 		sb.append(DbConstants.SOURCE_COL_NAME);
 		sb.append(", ");
 		sb.append(DbConstants.SOURCE_COL_DESCRIPTION);
@@ -143,13 +146,14 @@ public class SourceAccessor {
 		sb.append(", ");
 		sb.append(DbConstants.SOURCE_COL_COUNTRY);
 		sb.append(", ");
-		sb.append(DbConstants.SOURCE_COL_APPROVALSTATUS);
+		sb.append(DbConstants.SOURCE_COL_URLLOGO);
 		sb.append(", ");
+		sb.append(DbConstants.SOURCE_COL_APPROVALSTATUS);
 //		sb.append(DbConstants.SOURCE_COL_USERID);
 //		sb.append(", ");
-		sb.append(DbConstants.SOURCE_COL_SOURCE_ID);
+		
 		sb.append(" ) ");
-		sb.append("VALUES ( ?, ?, ?, ?, ?, ?, ?, ? );");
+		sb.append("VALUES ( ?, ?, ?, ?, ?, ?, ?,?, ? );");
 		
 		_insertSource = connection.prepareStatement(sb.toString());
 		return _insertSource;

@@ -39,22 +39,23 @@ public class ArticleAccessor {
 		article.setTitle(rs.getString(DbConstants.ARTICLE_COL_TITLE));
 		article.setUrl(rs.getString(DbConstants.ARTICLE_COL_URL));
 		article.setUrlToImage(rs.getString(DbConstants.ARTICLE_COL_URLTOIMAGE));
+		article.setSource(rs.getString(DbConstants.ARTICLE_COL_SOURCEID));
 		return article;
 	}
 	
-	public void insertArticle(Article article,Source source) throws SQLException {
+	public void insertArticle(Article article) throws SQLException {
 		try {
 			_insertArticleStatement = getInsertStatement();
 			_insertArticleStatement.setString(1, article.getAuthor());
-			_insertArticleStatement.setString(2, article.getDescription());
-			_insertArticleStatement.setString(3, article.getPublishTime());
-			_insertArticleStatement.setString(4, article.getTitle());
-			_insertArticleStatement.setString(5, article.getUrl());
-			_insertArticleStatement.setString(6, article.getUrlToImage());
-			_insertArticleStatement.setString(7, source.getId());
+			_insertArticleStatement.setString(7, article.getDescription());
+			_insertArticleStatement.setString(5, article.getPublishTime());
+			_insertArticleStatement.setString(2, article.getTitle());
+			_insertArticleStatement.setString(3, article.getUrl());
+			_insertArticleStatement.setString(4, article.getUrlToImage());
+			_insertArticleStatement.setString(6, article.getSource());
 
 			
-			_insertArticleStatement.executeQuery();
+			_insertArticleStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,17 +71,17 @@ public class ArticleAccessor {
 		sb.append(" ( ");
 		sb.append(DbConstants.ARTICLE_COL_AUTHOR);
 		sb.append(", ");
-		sb.append(DbConstants.ARTICLE_COL_DESCRIPTION);
-		sb.append(", ");
-		sb.append(DbConstants.ARTICLE_COL_PUBLISHTIME);
-		sb.append(", ");
 		sb.append(DbConstants.ARTICLE_COL_TITLE);
 		sb.append(", ");
 		sb.append(DbConstants.ARTICLE_COL_URL);
 		sb.append(", ");
 		sb.append(DbConstants.ARTICLE_COL_URLTOIMAGE);
 		sb.append(", ");
+		sb.append(DbConstants.ARTICLE_COL_PUBLISHTIME);
+		sb.append(", ");
 		sb.append(DbConstants.ARTICLE_COL_SOURCEID);
+		sb.append(", ");
+		sb.append(DbConstants.ARTICLE_COL_DESCRIPTION);
 		sb.append(" ) ");
 		sb.append("VALUES ( ?, ?, ?, ?, ?, ?, ? ); ");
 		
@@ -90,18 +91,20 @@ public class ArticleAccessor {
 	
 /**********************/
 	
-	public List<Article> getSelectArticlesByTopicStatement(Category category) {
+	public List<Article> getSelectArticlesByTopicStatement(String category) {
 
 		ResultSet rs = null;
 		ArrayList<Article> articles = new ArrayList<Article>();
 		
 		try {
 			_selectArticlesByTopicStatement = getArticlesByTopicStatement();
-			_selectArticlesByTopicStatement.setString(1, category.getCategory());
+			_selectArticlesByTopicStatement.setString(1,category);
 			rs = _selectArticlesByTopicStatement.executeQuery();
 			
-			while(rs.next()) {
+			int count =1;
+			while(rs.next() && count <=3) {
 				articles.add(asArticle(rs));
+				count++;
 			}
 			return articles;
 		} catch (SQLException e) {

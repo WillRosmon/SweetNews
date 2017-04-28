@@ -12,9 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.sn.api.util.ArticleRequest;
+import com.sn.api.util.SourceRequest;
 import com.sn.create.bean.RetrieveArticlesBean;
 import com.sn.create.bean.RetrieveSourcesBean;
 import com.sn.database.accessors.CategoryAccessor;
+import com.sn.database.accessors.SourceAccessor;
 import com.sn.database.accessors.UserAccessor;
 import com.sn.database.objects.*;
 import com.sn.database.utilities.ConnectionPool;
@@ -45,27 +51,20 @@ public class UserServlet extends HttpServlet {
 		
 		System.out.println(action);
 		
+		RetrieveSourcesBean retrivesource = new RetrieveSourcesBean();
 		
-	/*	//Populate index.jsp with sample articles
-		RetrieveArticlesBean rab = new RetrieveArticlesBean();
-		List<Article> article = rab.retrieveArticlesByTopic("ap");
-		int beginIndex = 0;
-		if(article.isEmpty()){
-			beginIndex = -1;
-		}else{
-			beginIndex = article.size() - 4;
-		}
+		//retrivesource.initialiseSources();  run this code the first time you are running the server, 
+		                                     //check the db for table source, if the sources are added, then comment it later
 		
-		if(beginIndex >= 0){
-			List<Article> returnArticles = new ArrayList<Article>();
-			for(int i = beginIndex; i < article.size(); i++){
-				returnArticles.add(article.get(i));
-			}
-			session.setAttribute("returnArticles", returnArticles);
-		}else{
-			throw new RuntimeException("No Articles Found!");
-		} */
-
+		
+		
+		RetrieveArticlesBean retrievearticle = new RetrieveArticlesBean();
+		
+		//retrievearticle.initaliseArticles();   run this code the after the sources are loaded, 
+        									     //check the db for table article, if the articles are added, then comment it later
+		 
+		
+		
 		
 		
 		if(action == null){
@@ -86,6 +85,8 @@ public class UserServlet extends HttpServlet {
 			user.setEmail(email);
 			user.setPassword(password);
 			
+			List<Article> articleList =  new ArrayList<Article>();
+			
 			UserBean userbean = new UserBean();
 			
 			if(userbean.login(user))
@@ -103,6 +104,9 @@ public class UserServlet extends HttpServlet {
 					user=userbean.getPreference(user);
 					System.out.println(user.getInterests());
 					session.setAttribute("theUser", user);
+					articleList.addAll(retrievearticle.retrieveArticlesByTopic(user.getInterests()));
+					System.out.println(articleList.get(1).getDescription());
+					session.setAttribute("articles", articleList);
 		            url="/main.jsp";
 				}
 				
@@ -172,6 +176,9 @@ public class UserServlet extends HttpServlet {
 		
 		//TODO: Handle displaying sources/articles based on user preferences
 		//ONLY 3 FOR EACH PREFERENCE!
+		
+		
+		
 			RetrieveSourcesBean rsb = new RetrieveSourcesBean();
 			//TODO: Get user and loop through his preferences.
 			/*
