@@ -13,9 +13,37 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" rel="stylesheet">
 		<link href="CSS/styles.css" rel="stylesheet">
+		<script type="text/javascript">
+		function onbodyload()
+		{
+			var sessionname= document.getElementById("usersessionname").value;
+			alert(sessionname);
+			if(sessionname != null)
+	        {
+	            document.getElementById("homebar").style.visibility='hidden';
+	            document.getElementById("aboutbar").style.visibility='hidden';
+	            document.getElementById("signbar").style.visibility='hidden';
+	            document.getElementById("loginbar").style.visibility='hidden';
+	            document.getElementById("logoutbar").style.visibility='visible';
+	        }
+	        else
+	        {
+	        	document.getElementById("homebar").style.visibility='visible';
+	        	document.getElementById("aboutbar").style.visibility='visible';
+	        	document.getElementById("signbar").style.visibility='visible';
+	            document.getElementById("loginbar").style.visibility='visible';
+	            document.getElementById("logoutbar").style.visibility='hidden';        
+	        }
+			
+			
+		}
+		
+		</script>
+		
+		
 	</head>
 	
-	<body id="top">
+	<body id="top" onLoad ="onbodyload()">
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<header class="mdl-layout__header mdl-layout__header--waterfall site-header">
 				<div class="mdl-layout__header-row site-logo-row">
@@ -23,19 +51,22 @@
 						<span class="site-description" style="margin-left: 20px;">Sweet News</span>
 					</span>
 				</div>
+				<input type="hidden" name="usersessionname" value="${sessionScope.theUser}" />
 				<div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
 					<nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-						<a class="mdl-navigation__link" href="index.jsp">Home</a>
-						<a class="mdl-navigation__link" href="about.jsp">About</a>
-						<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
-						<c:choose>
+						<a class="mdl-navigation__link" href="index.jsp" id="homebar">Home</a>
+						<a class="mdl-navigation__link" href="about.jsp" id="aboutbar">About</a>
+						<a class="mdl-navigation__link" href="signup.jsp" id="signbar">Sign Up</a>
+						<a class="mdl-navigation__link" href="index.jsp#login" id="loginbar">LogIn</a>
+						<a class="mdl-navigation__link" href="index.jsp#login" id="logoutbar">LogOut</a>
+						<%-- <c:choose>
 							<c:when test="${sessionScope.theUser == null}">
-								<a class="mdl-navigation__link" href="index.jsp#login">Login</a>
+								<a class="mdl-navigation__link" href="index.jsp#login">Logout</a>
 							</c:when>
 							<c:otherwise>
-								<a class="mdl-navigation__link" href="">Login</a>
+								<a class="mdl-navigation__link" href="">LogIn</a>
 							</c:otherwise>
-						</c:choose>
+						</c:choose> --%>
 					</nav>
 				</div>
 			</header>

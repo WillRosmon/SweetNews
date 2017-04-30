@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -48,19 +49,26 @@ public class UserServlet extends HttpServlet {
 		
 		//Proper way to instantiate?
 		User user = new User();
+		User index = new User();
+		
+		List<Article> articles =  new ArrayList<Article>();
+		
+		String [] general = {"general","politics","sport","entertainment","science-and-nature"};
+		
+		index.setInterests(new ArrayList<String>(Arrays.asList(general)));
 		
 		System.out.println(action);
 		
 		RetrieveSourcesBean retrivesource = new RetrieveSourcesBean();
 		
-		//retrivesource.initialiseSources();  run this code the first time you are running the server, 
+		//retrivesource.initialiseSources();  //run this code the first time you are running the server, 
 		                                     //check the db for table source, if the sources are added, then comment it later
 		
 		
 		
 		RetrieveArticlesBean retrievearticle = new RetrieveArticlesBean();
 		
-		//retrievearticle.initaliseArticles();   run this code the after the sources are loaded, 
+		//retrievearticle.initaliseArticles();   //run this code the after the sources are loaded, 
         									     //check the db for table article, if the articles are added, then comment it later
 		 
 		
@@ -71,6 +79,9 @@ public class UserServlet extends HttpServlet {
 			action = "join";
 		}
 		if(action.equals("join")){
+			session.setAttribute("index", index);
+			articles.addAll(retrievearticle.retrieveArticlesByTopic(index.getInterests()));
+			session.setAttribute("indexlist", articles);
 			url = "/index.jsp";
 		}
 	
@@ -105,7 +116,6 @@ public class UserServlet extends HttpServlet {
 					System.out.println(user.getInterests());
 					session.setAttribute("theUser", user);
 					articleList.addAll(retrievearticle.retrieveArticlesByTopic(user.getInterests()));
-					System.out.println(articleList.get(1).getDescription());
 					session.setAttribute("articles", articleList);
 		            url="/main.jsp";
 				}
@@ -154,7 +164,6 @@ public class UserServlet extends HttpServlet {
 				url="/userpreference.jsp";
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
           }
@@ -166,9 +175,11 @@ public class UserServlet extends HttpServlet {
 			
 		   String[] preference = request.getParameterValues("preference");
 	       user=(User) session.getAttribute("theUser");
-		   
+	       
 	       UserBean userbean =new UserBean();
 	       userbean.addPreference(user, preference);
+	       
+	       session.setAttribute("theUser", user);
 	       
 	       url="/main.jsp";
 			
