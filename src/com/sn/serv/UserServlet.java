@@ -53,14 +53,14 @@ public class UserServlet extends HttpServlet {
 		
 		RetrieveSourcesBean retrivesource = new RetrieveSourcesBean();
 		
-		//retrivesource.initialiseSources();  run this code the first time you are running the server, 
+		//retrivesource.initialiseSources();  //run this code the first time you are running the server, 
 		                                     //check the db for table source, if the sources are added, then comment it later
 		
 		
 		
 		RetrieveArticlesBean retrievearticle = new RetrieveArticlesBean();
 		
-		//retrievearticle.initaliseArticles();   run this code the after the sources are loaded, 
+		//retrievearticle.initaliseArticles();   //run this code the after the sources are loaded, 
         									     //check the db for table article, if the articles are added, then comment it later
 		 
 		

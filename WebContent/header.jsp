@@ -25,7 +25,14 @@
 				</div>
 				<div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
 					<nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-						<a class="mdl-navigation__link" href="index.jsp">Home</a>
+						<c:choose>
+							<c:when test="${sessionScope.theUser == null}">
+								<a class="mdl-navigation__link" href="index.jsp">Home</a>
+							</c:when>
+							<c:otherwise>
+								<a class="mdl-navigation__link" href="main.jsp">Home</a>
+							</c:otherwise>
+						</c:choose>
 						<a class="mdl-navigation__link" href="about.jsp">About</a>
 						<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
 						<c:choose>
