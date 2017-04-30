@@ -33,7 +33,7 @@
 								<a class="mdl-navigation__link" href="index.jsp#login">Login</a>
 							</c:when>
 							<c:otherwise>
-								<a class="mdl-navigation__link" href="">Login</a>
+								<a class="mdl-navigation__link" href="user?action=logout">Logout</a>
 							</c:otherwise>
 						</c:choose>
 					</nav>

@@ -115,7 +115,7 @@ public class UserServlet extends HttpServlet {
 			{
 				System.out.println("Invalid Credentials");
 				msg = "Invalid Credentials";
-				session.setAttribute("msg", msg);
+				request.setAttribute("msg", msg);
 				url = "/index.jsp";
 			}
 			
@@ -137,7 +137,7 @@ public class UserServlet extends HttpServlet {
 				User testuser = userbean.getUser(email);
             	if (testuser != null)
 				{
-					session.setAttribute("msg", msg);
+					request.setAttribute("msg", msg);
 					url = "/signup.jsp";
 				}
 				
@@ -229,11 +229,10 @@ public class UserServlet extends HttpServlet {
 		
 		else if(action.equals("logout")){
 			url = "/index.jsp";
-			String userLogged = (String) session.getAttribute("theUser");
-            if(userLogged != null){
+            if(user != null){
                 session.invalidate();
                 request.logout();
-                url = "/home.jsp";
+                url = "/index.jsp";
             }
 		}
 		
