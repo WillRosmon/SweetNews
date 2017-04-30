@@ -61,7 +61,7 @@ public class RetrieveArticlesBean {
 				article.setTitle(jo.get("title").toString());
 				article.setUrl(jo.get("url").toString());
 				article.setUrlToImage(jo.get("urlToImage").toString());
-				
+				System.out.println("Inserting Article" + article.getTitle());
 				articleaccess.insertArticle(article);
 			 }
 			}
@@ -86,5 +86,24 @@ public class RetrieveArticlesBean {
 			articleList.addAll(articleAccessor.getSelectArticlesByTopicStatement(categoryList.get(i)));
 		}
 		return articleList;
+	}
+	
+	public List<Article> getMainPageArticles() {
+		List<String> categoryList = new ArrayList<String>();
+		categoryList.add("general");
+		List<Article> articlesList = retrieveArticlesByTopic(categoryList);
+		System.out.println("DB Returned " + articlesList.size());
+		List<Article> returnList = new ArrayList<Article>();
+		if(articlesList != null && !articlesList.isEmpty()) {
+			if(articlesList.size() <= 3) {
+				return articlesList;
+			} else {
+				for(int i = articlesList.size() - 3; i < articlesList.size(); i++) {
+					returnList.add(articlesList.get(i));
+					return returnList;
+				}
+			}
+		}
+		return null;
 	}
 }

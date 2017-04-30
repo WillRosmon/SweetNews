@@ -11,7 +11,7 @@
 				</div>
 			</div>
 			<section class="section--center mdl-grid site-max-width">
-				<c:forEach items="${returnArticles}" var="a">
+				<c:forEach items="${requestScope.articles}" var="a">
 				    <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
 				        <div class="mdl-card__media">
 				            <img class="article-image" src="${a.urlToImage}" border="0" alt="">

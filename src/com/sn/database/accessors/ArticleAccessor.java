@@ -58,7 +58,7 @@ public class ArticleAccessor {
 			_insertArticleStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Article Already Loaded");
 		} finally {
 			_insertArticleStatement.close();
 		}
@@ -141,6 +141,9 @@ public class ArticleAccessor {
 		sb.append(DbConstants.ARTICLE_TABLE+"."+DbConstants.ARTICLE_COL_SOURCEID);
 		sb.append(" and ");
 		sb.append(DbConstants.CATEGORY_TABLE+"."+DbConstants.CATEGORY_COL_CATEGORYDESCRIPTION+" = ?");
+		sb.append("ORDER BY ");
+		sb.append(DbConstants.ARTICLE_COL_ARTICLEID);
+		sb.append(" DESC");
 		
 		_selectArticlesByTopicStatement = connection.prepareStatement(sb.toString());
 		return _selectArticlesByTopicStatement;
