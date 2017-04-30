@@ -137,31 +137,31 @@
 			        </div>
 			    </div>
 			</section>
-			<div class="homepage-footer">
-			  <section class="mdl-grid site-max-width">
-			      <div class="demo-card-event mdl-cell mdl-card mdl-shadow--4dp event-card portfolio-card" style="width: 1000px;height: 255px;">
-			        <div class="mdl-card__title mdl-card--expand" style="margin-top: 25px;">
-			        	<h2 class="mdl-card__title-text" style="margin-left: 37% !important"> Add Your Own Source! </h2>
-			        	<br/><br/>
-			       	</div>
-			       	<div style="margin-left: 25%">
-			          	<div id="submitSourceForm" class="submitSourceContainer" style="margin-left:20%;margin-bottom:25%;margin-top:2%;">
-							<form action="user" method="post">
-								<input type="hidden" name="action" value="add" />
-								<input type="text" name="source" placeholder="Source: AP/USA Today/etc" required />	
-								<br/><br/>
-								<input type="text" name="category" placeholder="Category" required/>
-								<br/>
-								<br/>
-								<input type="text" name="url" placeholder="URL" required />
-								<br/><br/>
-								<input type="submit" value="Submit" id="submitSource" />
-							</form>
-						</div>
-			        </div>
-			      </div>
-			  </section>
-			</div>
+<!-- 			<div class="homepage-footer"> -->
+<!-- 			  <section class="mdl-grid site-max-width"> -->
+<!-- 			      <div class="demo-card-event mdl-cell mdl-card mdl-shadow--4dp event-card portfolio-card" style="width: 1000px;height: 255px;"> -->
+<!-- 			        <div class="mdl-card__title mdl-card--expand" style="margin-top: 25px;"> -->
+<!-- 			        	<h2 class="mdl-card__title-text" style="margin-left: 37% !important"> Add Your Own Source! </h2> -->
+<!-- 			        	<br/><br/> -->
+<!-- 			       	</div> -->
+<!-- 			       	<div style="margin-left: 25%"> -->
+<!-- 			          	<div id="submitSourceForm" class="submitSourceContainer" style="margin-left:20%;margin-bottom:25%;margin-top:2%;"> -->
+<!-- 							<form action="user" method="post"> -->
+<!-- 								<input type="hidden" name="action" value="add" /> -->
+<!-- 								<input type="text" name="source" placeholder="Source: AP/USA Today/etc" required />	 -->
+<!-- 								<br/><br/> -->
+<!-- 								<input type="text" name="category" placeholder="Category" required/> -->
+<!-- 								<br/> -->
+<!-- 								<br/> -->
+<!-- 								<input type="text" name="url" placeholder="URL" required /> -->
+<!-- 								<br/><br/> -->
+<!-- 								<input type="submit" value="Submit" id="submitSource" /> -->
+<!-- 							</form> -->
+<!-- 						</div> -->
+<!-- 			        </div> -->
+<!-- 			      </div> -->
+<!-- 			  </section> -->
+<!-- 			</div> -->
 		</div>
       </div>
 
