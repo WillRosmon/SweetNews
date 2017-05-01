@@ -16,9 +16,15 @@ public class SourceAccessor {
 	private Connection connection = null;
 	
 	private PreparedStatement _insertSource;
+	private PreparedStatement _insertSourceAdder;
 	private PreparedStatement _selectourceByID;
 	private PreparedStatement _selectSourcesByTopic;
 	private PreparedStatement _selectAllSources;
+	private PreparedStatement _selectSourcesForApproval;
+	
+	private PreparedStatement _updateApproval;
+	private PreparedStatement _diapproveStatus;
+	
 	
 	public SourceAccessor(Connection connection) {
 		this.connection = connection;
@@ -45,6 +51,66 @@ public class SourceAccessor {
 		return null;
 	}
 	
+	public List<Source> selectSourcesForApproval(String username) {
+		ResultSet rs = null;
+		ArrayList<Source> sources = new ArrayList<Source>();
+		
+		
+		try {
+			_selectSourcesForApproval = getSelectSourcesForApprovalStatement();
+			_selectSourcesForApproval.setString(1, username);
+			
+			rs = _selectSourcesForApproval.executeQuery();
+			
+			while(rs.next()) {
+				sources.add(asSourceAdded(rs));
+			}
+			return sources;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			cleanup(_selectSourcesForApproval, rs);
+		}
+		return null;
+	}
+	
+	
+	public int updateApproval(String sourceid) {
+		
+		ResultSet rs = null;
+		
+		try {
+			_updateApproval = updateApprovalStatement();
+			_updateApproval.setString(1, sourceid);
+			
+			return _updateApproval.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			cleanup(_updateApproval, rs);
+		}
+		return 0;
+	}
+	
+		public int disapproveStatus(String sourceid) {
+		
+		ResultSet rs = null;
+		
+		try {
+			_diapproveStatus = disapproveStatusStatement();
+			_diapproveStatus.setString(1, sourceid);
+			
+			return _diapproveStatus.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			cleanup(_diapproveStatus, rs);
+		}
+			return 0;
+		}
+
 	public Source selectSourceById(String id) {
 		ResultSet rs = null;
 		try {
@@ -83,6 +149,21 @@ public class SourceAccessor {
 			e.printStackTrace();
 		} finally {
 			_insertSource.close();
+		}
+	}
+	
+	public void insertSourceAdder(Source source) throws SQLException {
+		try {
+			_insertSourceAdder = getInsertAdderStatement();
+			_insertSourceAdder.setString(2, source.getUserId());
+			_insertSourceAdder.setString(1, source.getId());
+			
+			_insertSourceAdder.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			_insertSourceAdder.close();
 		}
 	}
 	
@@ -127,6 +208,14 @@ public class SourceAccessor {
 		return source;
 	}
 	
+	private Source asSourceAdded(ResultSet rs) throws SQLException {
+		Source source = new Source();
+		source.setCategory(rs.getString(DbConstants.SOURCE_COL_CATEGORY));
+		source.setId(rs.getString(DbConstants.SOURCE_COL_SOURCE_ID));
+		source.setUrl(rs.getString(DbConstants.SOURCE_COL_URL));
+		return source;
+	}
+	
 	private PreparedStatement getInsertStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
@@ -159,12 +248,63 @@ public class SourceAccessor {
 		return _insertSource;
 	}
 	
+	private PreparedStatement getInsertAdderStatement() throws SQLException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT INTO ");
+		sb.append("source_added");
+		sb.append(" ( ");
+		sb.append("SourceId");
+		sb.append(", ");
+		sb.append("AdminAdded");		
+		sb.append(" ) ");
+		sb.append("VALUES ( ?, ?);");
+		
+		_insertSourceAdder = connection.prepareStatement(sb.toString());
+		return _insertSourceAdder;
+	}
+	
 	private PreparedStatement getSelectAllSourcesStatement() throws SQLException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT * FROM ");
 		sb.append(DbConstants.SOURCE_TABLE);
+		sb.append(" where ");
+		sb.append(DbConstants.SOURCE_COL_APPROVALSTATUS+" = 1;");
 		_selectAllSources = connection.prepareStatement(sb.toString());
 		return _selectAllSources;
+	}
+	
+	private PreparedStatement getSelectSourcesForApprovalStatement() throws SQLException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT * FROM ");
+		sb.append(DbConstants.SOURCE_TABLE+" , source_added");
+		sb.append(" where ");
+		sb.append(DbConstants.SOURCE_TABLE+"."+DbConstants.SOURCE_COL_SOURCE_ID+"= source_added.SourceId and ");
+		sb.append(DbConstants.SOURCE_TABLE+"."+DbConstants.SOURCE_COL_APPROVALSTATUS+"= 0 and ");
+		sb.append("source_added.AdminAdded != ?");
+		_selectSourcesForApproval = connection.prepareStatement(sb.toString());
+		return _selectSourcesForApproval;
+	}
+	
+	private PreparedStatement updateApprovalStatement() throws SQLException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("update ");
+		sb.append(DbConstants.SOURCE_TABLE);
+		sb.append(" set ");
+		sb.append(DbConstants.SOURCE_COL_APPROVALSTATUS+" = 1 ");
+		sb.append("where ");
+		sb.append(DbConstants.SOURCE_COL_SOURCE_ID+" = ?;");
+		_selectSourcesForApproval = connection.prepareStatement(sb.toString());
+		return _selectSourcesForApproval;
+	}
+	
+	private PreparedStatement disapproveStatusStatement() throws SQLException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("delete from ");
+		sb.append(DbConstants.SOURCE_TABLE);
+		sb.append(" where ");
+		sb.append(DbConstants.SOURCE_COL_SOURCE_ID+" = ?;");
+		_selectSourcesForApproval = connection.prepareStatement(sb.toString());
+		return _selectSourcesForApproval;
 	}
 	
 	private PreparedStatement getSelectSourceByIDStatement() throws SQLException {

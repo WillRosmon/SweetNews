@@ -93,7 +93,7 @@ public User getUser(String email) throws SQLException {
 		User loginuser=new User();
 		loginuser=readUserById(user.getEmail());
 		
-		if(loginuser.getEmail().contains("admin"))
+		if(user.getEmail().equals("admin123@asd") || user.getEmail().equals("admin016@asd"))
 		    return type;
 		else
 			return "user";
@@ -108,8 +108,9 @@ public User getUser(String email) throws SQLException {
 		CategoryAccessor categoryaccessor= new CategoryAccessor(connection);
 		
 		try{
-		for(int i=0;i<interest.length;i++)
+		for(int i=0;i<interest.length;i++){
 			categoryaccessor.insertUserCategory(interest[i], user);
+		}
 		}
 		catch(SQLException e)
 		{

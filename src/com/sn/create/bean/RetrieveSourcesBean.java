@@ -2,6 +2,7 @@ package com.sn.create.bean;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -96,5 +97,82 @@ public class RetrieveSourcesBean {
 		}
 	}
 	
+	
+	public void addNewSource(Source source){
+		Connection connection = null;
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.getConnection();
+		
+		SourceAccessor sourceaccess = new SourceAccessor(connection);
+		
+		try{
+				
+				source.setApprovalStatus(0);
+				sourceaccess.insertSource(source);
+				sourceaccess.insertSourceAdder(source);
+				
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			pool.freeConnection(connection);
+		}
+	
+	}
+	
+	public List<Source> selectSourceForApproval(String username){
+		Connection connection = null;
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.getConnection();
+		
+		SourceAccessor sourceaccess = new SourceAccessor(connection);
+		List<Source> pendingsources = new ArrayList<Source>();
+		
+		
+		try{
+				pendingsources.addAll(sourceaccess.selectSourcesForApproval(username));
+				
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			pool.freeConnection(connection);
+		}
+		
+		return pendingsources;
+	
+	}
+	
+	public Boolean approveStatus(String sourceid)
+	{
+		Connection connection = null;
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.getConnection();
+		
+		SourceAccessor sourceaccess = new SourceAccessor(connection);
+
+		if(sourceaccess.updateApproval(sourceid) > 0)
+			return Boolean.TRUE;
+		else
+			return Boolean.FALSE;
+	}
+	
+	public Boolean disapproveStatus(String sourceid)
+	{
+		Connection connection = null;
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.getConnection();
+		
+		SourceAccessor sourceaccess = new SourceAccessor(connection);
+
+		if(sourceaccess.disapproveStatus(sourceid) > 0)
+			return Boolean.TRUE;
+		else
+			return Boolean.FALSE;
+	}
 	
 }

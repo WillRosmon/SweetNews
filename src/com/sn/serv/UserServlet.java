@@ -97,16 +97,24 @@ public class UserServlet extends HttpServlet {
 			user.setPassword(password);
 			
 			List<Article> articleList =  new ArrayList<Article>();
+			List<Source> pendingSources =  new ArrayList<Source>();
 			
 			UserBean userbean = new UserBean();
 			
 			if(userbean.login(user))
 			{
 				System.out.println("valid credentials");
-				if(userbean.checkUserType(user).equals("admin"))
+				String check = userbean.checkUserType(user);
+				if(check.equals("admin"))
 				{
 					System.out.println("admin");
-					session.setAttribute("theAdmin", user);
+					user=userbean.getPreference(user);
+					System.out.println(user.getInterests());
+					session.setAttribute("theUser", user);
+					articleList.addAll(retrievearticle.retrieveArticlesByTopic(user.getInterests()));
+					session.setAttribute("articles", articleList);
+					pendingSources.addAll(retrivesource.selectSourceForApproval(user.getEmail()));
+					session.setAttribute("pendingSources", pendingSources);
 		            url="/admin.jsp";
 				}
 				else
@@ -125,7 +133,7 @@ public class UserServlet extends HttpServlet {
 			{
 				System.out.println("Invalid Credentials");
 				msg = "Invalid Credentials";
-				session.setAttribute("msg", msg);
+				request.setAttribute("msg", msg);
 				url = "/index.jsp";
 			}
 			
@@ -147,7 +155,7 @@ public class UserServlet extends HttpServlet {
 				User testuser = userbean.getUser(email);
             	if (testuser != null)
 				{
-					session.setAttribute("msg", msg);
+					request.setAttribute("msg", msg);
 					url = "/signup.jsp";
 				}
 				
@@ -160,7 +168,6 @@ public class UserServlet extends HttpServlet {
 				userbean.addUser(user);
 				
 				session.setAttribute("theUser", user);
-				
 				url="/userpreference.jsp";
 				}
 			} catch (SQLException e) {
@@ -175,76 +182,69 @@ public class UserServlet extends HttpServlet {
 			
 		   String[] preference = request.getParameterValues("preference");
 	       user=(User) session.getAttribute("theUser");
+	       List<Article> articleList =  new ArrayList<Article>();
+
 	       
 	       UserBean userbean =new UserBean();
+	 
 	       userbean.addPreference(user, preference);
 	       
+	       user.setInterests(new ArrayList<String>(Arrays.asList(preference)));
 	       session.setAttribute("theUser", user);
-	       
+			
+	       articleList.addAll(retrievearticle.retrieveArticlesByTopic(user.getInterests()));
+		   session.setAttribute("articles", articleList);
 	       url="/main.jsp";
 			
 		}
 		
 		//TODO: Handle displaying sources/articles based on user preferences
 		//ONLY 3 FOR EACH PREFERENCE!
-		
-		
-		
-			RetrieveSourcesBean rsb = new RetrieveSourcesBean();
-			//TODO: Get user and loop through his preferences.
-			/*
-			 * for(UserBean user : user){
-			 * 		User user = user.getPreference(user);
-			 */
-//			List<Source> userSources = rsb.getSourcesByCategory("");
-//			int beginIndex = 0;
-//			if(article.isEmpty()){
-//				beginIndex = -1;
-//			}else{
-//				beginIndex = article.size() - 4;
-//			}
-//			
-//			if(beginIndex >= 0){
-//				List<Article> returnArticles = new ArrayList<Article>();
-//				for(int i = beginIndex; i < article.size(); i++){
-//					returnArticles.add(article.get(i));
-//				}
-//				session.setAttribute("returnArticles", returnArticles);
-//			}else{
-//				throw new RuntimeException("No Articles Found!");
-//			}
-		
-		
 			
 			
 		//Handle source addition
 		if(action.equals("add")){
-			String source = request.getParameter("source");
-			String articleUrl = request.getParameter("URL");
-			String articleCategory = request.getParameter("Category");
-			Article newArticle = new Article();
-			newArticle.setUrl(articleUrl);
-			newArticle.setSource(source);
+			String sourcename = request.getParameter("source");
+			String sourceUrl = request.getParameter("url");
+			String sourceCategory = request.getParameter("category");
+			
+			User use = (User)session.getAttribute("theUser");
+			
+			Source source = new Source();
+			source.setId(sourcename);
+			source.setName(sourcename);
+			source.setCategory(sourceCategory);
+			source.setUrl(sourceUrl);
+			source.setUserId(use.getEmail());
+			
+			retrivesource.addNewSource(source);
+			
+			url="/admin.jsp";
+			
 			
 		}
 		
 		//Handle admin approval
 		if(action.equals("approve")){
-			//TODO: Set the submitted source to approved in DB
-			//The source that is added does not need to be shown on the site anywhere
+			String sourceid = (String) request.getParameter("sourcename");
+			System.out.println(sourceid);
+			retrivesource.approveStatus(sourceid);
+			url = "/admin.jsp";		
 		}
 		if(action.equals("disapprove")){
-			//TODO: Set the submitted source to disapproved in DB
-			//The source that is added does not need to be shown on the site anywhere
+			
+			String sourceid = (String) request.getParameter("sourcename");
+			System.out.println(sourceid);
+			retrivesource.disapproveStatus(sourceid);
+			url = "/admin.jsp";
 		}
 		
 		else if(action.equals("logout")){
 			url = "/index.jsp";
-			String userLogged = (String) session.getAttribute("theUser");
-            if(userLogged != null){
+            if(user != null){
                 session.invalidate();
                 request.logout();
-                url = "/home.jsp";
+                url = "/index.jsp";
             }
 		}
 		

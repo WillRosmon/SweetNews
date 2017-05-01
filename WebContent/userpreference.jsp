@@ -12,7 +12,7 @@
 							<input type="hidden" name="action" value="preference" />
 							<input type="checkbox" name="preference" value="business">Business<br><br>
 							<input type="checkbox" name="preference" value="technology">Technology<br><br>
-							<input type="checkbox" name="preference" value="sports">Sports<br><br>
+							<input type="checkbox" name="preference" value="sport">Sports<br><br>
 							<input type="checkbox" name="preference" value="science-and-nature">Science<br><br>
 							<input type="checkbox" name="preference" value="general">General<br><br>
 							<input type="checkbox" name="preference" value="gaming">Gaming<br><br>
