@@ -68,9 +68,9 @@
 							</c:otherwise>
 						</c:choose>
 						<a class="mdl-navigation__link" href="about.jsp">About</a>
-						<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
 						<c:choose>
 							<c:when test="${theUser == null}">
+								<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
 								<a class="mdl-navigation__link" href="index.jsp#login">Login</a>
 							</c:when>
 							<c:otherwise>

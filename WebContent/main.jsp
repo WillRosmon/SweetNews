@@ -30,7 +30,7 @@
 				{
 					Article article = articles.get(j);
 					out.println("<div class='mdl-cell mdl-card mdl-shadow--4dp portfolio-card'>"+"<div class='mdl-card__media'>");
-					out.println("<img class='article-image' src='"+article.getUrlToImage()+"' border='0' alt=''>"+"</div>");
+					out.println("<a href='"+article.getUrl()+"'><img class='article-image' src='"+article.getUrlToImage()+"' border='0' alt=''></a>"+"</div>");
 					out.println("<div class='mdl-card__title'>"+"<h2 class='mdl-card__title-text'>"+article.getTitle()+"</h2></div>");
 					out.println("<div class='mdl-card__supporting-text'>"+article.getDescription()+"</div></div>");
 					j++;
