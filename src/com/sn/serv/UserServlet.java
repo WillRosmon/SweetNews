@@ -242,9 +242,11 @@ public class UserServlet extends HttpServlet {
 		else if(action.equals("logout")){
 			url = "/index.jsp";
             if(user != null){
-                session.invalidate();
+                //session.invalidate();
                 request.logout();
                 url = "/index.jsp";
+                user = null;
+                session.setAttribute("theUser",user);
             }
 		}
 		

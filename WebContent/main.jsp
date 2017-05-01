@@ -25,7 +25,7 @@
 			  {
 				String categoryname =  userit.next();  
 				out.println("<section class='section--center mdl-grid site-max-width'>"+"<div class='section--center mdl-grid site-max-width' style='width:1000px;margin-bottom:-20px;'>");
-				out.println("<h2 style='font-size:30px;'>"+categoryname+"</h2>"+"</div><br>");		  
+				out.println("<h2 style='font-size:30px;'>"+categoryname.toUpperCase()+"</h2>"+"</div><br>");		  
 				for(int i=0;i<3;i++)
 				{
 					Article article = articles.get(j);

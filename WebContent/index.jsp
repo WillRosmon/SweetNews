@@ -42,12 +42,12 @@
 			  {
 				String categoryname =  userit.next();  
 				out.println("<section class='section--center mdl-grid site-max-width'>"+"<div class='section--center mdl-grid site-max-width' style='width:1000px;margin-bottom:-20px;'>");
-				out.println("<h2 style='font-size:30px;'>"+categoryname+"</h2>"+"</div><br>");		  
+				out.println("<h2 style='font-size:30px;'>"+categoryname.toUpperCase()+"</h2>"+"</div><br>");		  
 				for(int i=0;i<3;i++)
 				{
 					Article article = articles.get(j);
 					out.println("<div class='mdl-cell mdl-card mdl-shadow--4dp portfolio-card'>"+"<div class='mdl-card__media'>");
-					out.println("<img class='article-image' src='"+article.getUrlToImage()+"' border='0' alt=''>"+"</div>");
+					out.println("<a href='"+article.getUrl()+"'><img class='article-image' src='"+article.getUrlToImage()+"' border='0' alt=''></a>"+"</div>");
 					out.println("<div class='mdl-card__title'>"+"<h2 class='mdl-card__title-text'>"+article.getTitle()+"</h2></div>");
 					out.println("<div class='mdl-card__supporting-text'>"+article.getDescription()+"</div></div>");
 					j++;

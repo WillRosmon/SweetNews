@@ -53,12 +53,12 @@
 				<input type="hidden" id="usersessionname" value="${sessionScope.theUser}" />
 				<div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
 					<nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-						<a class="mdl-navigation__link" href="index.jsp" id="homebar">Home</a>
+						<!-- <a class="mdl-navigation__link" href="index.jsp" id="homebar">Home</a>
 						<a class="mdl-navigation__link" href="about.jsp" id="aboutbar">About</a>
-						<a class="mdl-navigation__link" href="signup.jsp" id="signbar">Sign Up</a>
-						<a class="mdl-navigation__link" href="index.jsp#login" id="loginbar">LogIn</a>
-						<a class="mdl-navigation__link" href="index.jsp#login" id="logoutbar">LogOut</a>
-						<%-- <c:choose>
+						<a class="mdl-navigation__link" href="signup.jsp" id="signbar">Sign Up</a> -->
+						<!-- <a class="mdl-navigation__link" href="index.jsp#login" id="loginbar">LogIn</a>
+						<a class="mdl-navigation__link" href="index.jsp#login" id="logoutbar">LogOut</a> -->
+						
 						<c:choose>
 							<c:when test="${sessionScope.theUser == null}">
 								<a class="mdl-navigation__link" href="index.jsp">Home</a>
@@ -70,16 +70,13 @@
 						<a class="mdl-navigation__link" href="about.jsp">About</a>
 						<a class="mdl-navigation__link" href="signup.jsp">Sign Up</a>
 						<c:choose>
-							<c:when test="${sessionScope.theUser == null}">
-								<a class="mdl-navigation__link" href="index.jsp#login">Logout</a>
+							<c:when test="${theUser == null}">
+								<a class="mdl-navigation__link" href="index.jsp#login">Login</a>
 							</c:when>
 							<c:otherwise>
-
-								<a class="mdl-navigation__link" href="">LogIn</a>
-
 								<a class="mdl-navigation__link" href="user?action=logout">Logout</a>
 							</c:otherwise>
-						</c:choose> --%>
+						</c:choose>
 					</nav>
 				</div>
 			</header>
